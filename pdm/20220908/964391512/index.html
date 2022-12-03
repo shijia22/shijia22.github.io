@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="紀錄在產品經理職位上，曾做過的事情，還有怎麼分階段的達成任務及分享。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="專案流程工具－Asana 導入思路">
+<meta property="og:url" content="https://shijia22.github.io/pdm/20220908/964391512/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="紀錄在產品經理職位上，曾做過的事情，還有怎麼分階段的達成任務及分享。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2022-09-08T07:23:41.000Z">
+<meta property="article:modified_time" content="2022-09-12T13:46:39.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="PDM">
+<meta property="article:tag" content="PM">
+<meta property="article:tag" content="ProductManager">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/pdm/20220908/964391512/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/pdm/20220908/964391512/","path":"pdm/20220908/964391512/","title":"專案流程工具－Asana 導入思路"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>專案流程工具－Asana 導入思路 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%9B%E9%BB%9E"><span class="nav-number">2.</span> <span class="nav-text">痛點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E8%A7%A3%E6%B1%BA%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">主要解決的問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">4.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%A4%E9%BB%9E%E8%B3%87%E6%BA%90%EF%BC%8C%E7%A2%BA%E4%BF%9D%E6%87%89%E7%94%A8%E6%9C%80%E5%A4%A7%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text">盤點資源，確保應用最大化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E7%97%9B%E9%BB%9E%EF%BC%8C%E6%8C%96%E6%8E%98%E5%95%8F%E9%A1%8C%E6%9C%AC%E8%B3%AA"><span class="nav-number">4.2.</span> <span class="nav-text">需求痛點，挖掘問題本質</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA%E6%AD%A5%E9%A9%9F"><span class="nav-number">5.</span> <span class="nav-text">解決步驟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%99%E8%82%B2%E8%A8%93%E7%B7%B4%EF%BC%8C%E9%80%90%E4%B8%80%E7%A2%BA%E4%BF%9D%E5%8D%94%E4%BD%9C%E5%85%B1%E8%AD%98"><span class="nav-number">5.1.</span> <span class="nav-text">教育訓練，逐一確保協作共識</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">6.</span> <span class="nav-text">結論</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/pdm/20220908/964391512/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="專案流程工具－Asana 導入思路 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          專案流程工具－Asana 導入思路
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-09-08 15:23:41" itemprop="dateCreated datePublished" datetime="2022-09-08T15:23:41+08:00">2022-09-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-12 21:46:39" itemprop="dateModified" datetime="2022-09-12T21:46:39+08:00">2022-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/pdm/" itemprop="url" rel="index"><span itemprop="name">產品經理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>紀錄在產品經理職位上，曾做過的事情，還有怎麼分階段的達成任務及分享。</p>
+<span id="more"></span>
+
+<!-- toc -->
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><img src="https://i.imgur.com/2cTJTTu.png" alt="專案流程工具－Asana 導入思路"></p>
+<p>踏入職場以來，其實最需要的就是專案管理的思維，因為在職位上如何管理自己的知識庫、常用文件等，是可以大幅提升自己在工作上的效率。而我認為管理方式並沒有好或壞，只有自己順手與否及是否符合公司職場所需。</p>
+<h2 id="痛點"><a href="#痛點" class="headerlink" title="痛點"></a>痛點</h2><ul>
+<li>不同部門使用 Asana 工具流程不一，無法將工具應用最大化。</li>
+<li>產品需求零散，無法有效管理。</li>
+<li>導入工具但沒有對應的管理架構，因此造成討論內容、開發規格零散。</li>
+<li>SaaS 服務無整合，需要使用人工方式通知。</li>
+</ul>
+<h2 id="主要解決的問題"><a href="#主要解決的問題" class="headerlink" title="主要解決的問題"></a>主要解決的問題</h2><ol>
+<li>現有資源下，如何把專案管理工具應用最大化？</li>
+<li>不同部門專案管理工具的使用不一，如何確保產品需求、開發進度能夠同步掌握？</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="盤點資源，確保應用最大化"><a href="#盤點資源，確保應用最大化" class="headerlink" title="盤點資源，確保應用最大化"></a>盤點資源，確保應用最大化</h3><ol>
+<li><p>確保免費與付費差別，區分功能的優先重要性</p>
+<p> 雖然有時候課金玩家可以解決很多事，但站在經營者的角度卻會考量的是工具是否可以創造更大的價值，又或者是降低了甚麼成本，須要有具體的成效。</p>
+<p> 因此，了解使用者的需求痛點就相對重要！</p>
+</li>
+<li><p>確認經營者的工具認知，需要先了解這個問題重視程度，因為重視程度也會影響到提案的困難度，確保提案能夠順利。</p>
+</li>
+<li><p>盤點公司現有使用的服務，是否有可以串聯的可能性，主要是要確保不管免費或付費工具時，此工具在工作的整合是否能更加全面，不然會很像貼狗皮膏藥一樣，只為了解決單一需求所研究，更會增加日後若需要變動成本。</p>
+</li>
+</ol>
+<h3 id="需求痛點，挖掘問題本質"><a href="#需求痛點，挖掘問題本質" class="headerlink" title="需求痛點，挖掘問題本質"></a>需求痛點，挖掘問題本質</h3><ul>
+<li><strong>PDM</strong><ol>
+<li>方便管理產品需求</li>
+<li>可自動通知</li>
+<li>了解開發進度</li>
+</ol>
+</li>
+<li><strong>工程</strong><ol>
+<li>管控開發進度</li>
+<li>規格確認及討論</li>
+</ol>
+</li>
+<li><strong>其他部門</strong><ol>
+<li>完成通知</li>
+<li>公告</li>
+</ol>
+</li>
+</ul>
+<p>在產品開發及需求管理的流程，先透過免費版觀察了一至兩週同事如何使用 Asana，像是企劃就有提到「像是記事本一樣」，也就是說對他們來講此工具是可有可無，對於產品需求及開發，他們僅須要了解需求確認、終端狀況；而對於工程人員來說 Asana 就像是工單一樣，要在這個 task 上能夠獲得最大的資訊，並且能夠與 PDM、技術主管用最小成本進行溝通；而對我而言，在產品的需求、開發的整合更為重要，講求效率下我認為在<strong>自動化、統一管理</strong>更為重要。</p>
+<h2 id="解決步驟"><a href="#解決步驟" class="headerlink" title="解決步驟"></a>解決步驟</h2><ol>
+<li>現有資源<ol>
+<li>可多開不同專案，讓不同專案可客製，例如：使用者回饋跟產品功能需求就有不大一樣的 Borad、status、workflow。</li>
+<li>重度使用的成員為 PDM 及 IT team，因此已經縮減使用者人頭計費成本。</li>
+<li>零散的功能及需求有部分已經存於 Asana，不管專案開設也便於轉移。</li>
+<li>已有特定開發模式，可確保付費或免費時具有目標。</li>
+</ol>
+</li>
+<li>盤點免費版缺少的功能<ol>
+<li><p>自訂義欄位：因為專案不同所需的欄位不動，且預設欄位也能降低查看 task 的成本。</p>
+</li>
+<li><p>專案表單：這是超級關鍵，因為 Asana 有具備表單的功能，不管是需求或是回饋都可以透過表單直接填答，也不會有權限問題，快速的解決使用者換位需求不同的問題。</p>
+<p> 但當然，決議使用這個功能前，我有使用 Zapier + google sheet + google form 進行測試，但 Asana 已有多年的紀錄 + 轉換會有非常大的陣痛期及成本，因此棄用此方法。</p>
+</li>
+<li><p>連接應用程式：因為公司主要使用 slack 在溝通，所以能夠串上 Slack 即時通知會非常方便，還有就是 slack 當時是使用免費版也會有溝通訊息遺失的問題，透過 Asana 訊息溝通可以確保訊息留存也能快速連結到 task，會非常方便！</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>接著我就開始設計 workflow 還有 Form，並且提案先以「試用 30 天」開始確保接下來的設計是否有方便性並且能解決到上述的問題。</p>
+<p><img src="https://i.imgur.com/hQ6JfeC.png" alt="Image"></p>
+<p class="image-caption">圖片來源：<a target="_blank" rel="noopener" href="https://asana.com/product/forms">Asana</a></p>
+
+<ol>
+<li><p>拆成四種不同的專案，工程開發、產品需求、錯誤追蹤、使用者回饋，基於這四種專案設計不同的表單格式，確保在表單內就能夠有足夠的資訊可以讓我（PDM）快速釐清問題。</p>
+</li>
+<li><p>在表單設計面有幾大重點：</p>
+<ol>
+<li><p>填答者能夠先第一層判斷輕重緩急，而我針對高優先、中優先，都留下的敘述區塊，就是確保在這一層能夠先思考是否為優先，這樣才有參考價值。</p>
+<p> <img src="https://i.imgur.com/FsFyNEs.png" alt="Image"></p>
+</li>
+<li><p>客製化表單，像是錯誤追蹤就必須要盡可能知道載具、瀏覽器等等，所以可以直接能夠選擇的答案，也能確保資訊架構一致。</p>
+</li>
+<li><p>workflow 吻合評估，主要是設計後的表單是否能夠完整的進入 Asana 並且成立為 task，而 task 是否具備明確的資訊可以查看。</p>
+</li>
+</ol>
+</li>
+<li><p>Workflow 重點：</p>
+<ol>
+<li>確保流程單一，不要為了自動化而疏忽可能存在的例外。</li>
+<li>連結 slack 多方測試，確保資訊一致。</li>
+<li>降低人工成本及不必要的溝通成本。</li>
+</ol>
+</li>
+<li><p>自訂欄位確保可使用性：</p>
+<p> 像是自訂欄位中依照狀態的不同可以讓人快速了解狀況，可能是進度的處理中、待處理、已完成等等，但這些都必須要慢慢修正及依照使用者需求進行的，沒有通規。</p>
+<p> <img src="https://i.imgur.com/PJVyGQT.png" alt="Image"></p>
+ <p class="image-caption">圖片來源：<a target="_blank" rel="noopener" href="https://asana.com/templates/for/it/it-requests">Asana</a></p>
+</li>
+<li><p>因為有了試用所以在這期間也能收集不同的使用者回饋，並且分析為甚麼需要付費？大家使用上對於此設計是否升級有感？因此再向上提案，讓提案可以被採納。</p>
+<p> <img src="https://i.imgur.com/KHJfswi.png" alt="Image"></p>
+</li>
+<li><p>方案比價，屆時如果真的需要付費，應該要怎麼付費？要付多少人頭等等。</p>
+</li>
+</ol>
+<h3 id="教育訓練，逐一確保協作共識"><a href="#教育訓練，逐一確保協作共識" class="headerlink" title="教育訓練，逐一確保協作共識"></a>教育訓練，逐一確保協作共識</h3><p>有了表單、自訂欄位及 workflow 後，就趕緊利用試用的期間將大家的習慣、回饋迅速蒐集，且每次的討論、改動甚至是決議都要明確的記錄下來，且以此工具利用最大化為目標，為了就是讓經營者可以有「回本」感覺。</p>
+<p>而在這樣的過程我還特別做的一件事情就是比價，也延伸前一段所述每個人都期望自己付出的成本可以等價甚至是有賺到的感覺，並且在這短短的 30 天內逐一培養大家使用 Asana 的默契。</p>
+<p>例如：</p>
+<ol>
+<li>先讓大家適應表單，而不是過去那種用口頭敘述就成立的 task。</li>
+<li>確保表單資訊清楚，也就不會有 task 模板在那，但沒人遵照。</li>
+</ol>
+<p>完成以上後，再進行下一步的計畫，培養大家串聯 slack 看通知的習慣，因為之前其他部門有提到，信件一堆通知一堆，工作只看 slack，所以先培養了填寫表單，再來就是耐心提醒要串接 slack ，確保通知不會漏掉，也成功降低了人工成本。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在導入工具或是辦法規章時，最害怕的就是反抗及自己做自己爽，所以事前的觀察及利害關係人評估相當重要，就為了確保自己的研究能有價產出。<br>而產出的結果也是不斷迭代的過程，能夠與時俱進，也必須要透過先前提到的教育訓練、階段性培養來慢慢達成。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PDM/" rel="tag"><i class="fa fa-tag"></i> PDM</a>
+              <a href="/tags/PM/" rel="tag"><i class="fa fa-tag"></i> PM</a>
+              <a href="/tags/ProductManager/" rel="tag"><i class="fa fa-tag"></i> ProductManager</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/hexo/20220906/654596676/" rel="prev" title="使用 Hexo 與 NexT 打造自己的部落格">
+                  <i class="fa fa-chevron-left"></i> 使用 Hexo 與 NexT 打造自己的部落格
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/git/20220909/1556438598/" rel="next" title="紀錄 git clone 操作">
+                  紀錄 git clone 操作 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.2/algoliasearch-lite.umd.js" integrity="sha256-dImjLPUsG/6p3+i7gVKBiDM8EemJAhQ0VvkRK2pVsQY=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.49.1/instantsearch.production.min.js" integrity="sha256-3s8yn/IU/hV+UjoqczP+9xDS1VXIpMf3QYRUi9XoG0Y=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

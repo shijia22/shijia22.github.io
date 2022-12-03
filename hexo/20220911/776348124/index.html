@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="等選擇好主題後，就可以來配置對應的資料，來看看我怎麼操作吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NexT 主題基礎配置（1）－語言、favicon、slidebar、footer 設定">
+<meta property="og:url" content="https://shijia22.github.io/hexo/20220911/776348124/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="等選擇好主題後，就可以來配置對應的資料，來看看我怎麼操作吧。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2022-09-11T04:03:18.000Z">
+<meta property="article:modified_time" content="2022-09-15T02:45:55.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="NexT">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/hexo/20220911/776348124/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/hexo/20220911/776348124/","path":"hexo/20220911/776348124/","title":"NexT 主題基礎配置（1）－語言、favicon、slidebar、footer 設定"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NexT 主題基礎配置（1）－語言、favicon、slidebar、footer 設定 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%9E%E8%A8%80%E8%A8%AD%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">語言設置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-favicon"><span class="nav-number">3.</span> <span class="nav-text">配置 favicon</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="nav-number">3.1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%A4%A7%E9%A0%AD%E8%B2%BC"><span class="nav-number">4.</span> <span class="nav-text">配置大頭貼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E7%BD%AE-codeblock"><span class="nav-number">5.</span> <span class="nav-text">設置 codeblock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Slidebar"><span class="nav-number">6.</span> <span class="nav-text">Slidebar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Footer"><span class="nav-number">7.</span> <span class="nav-text">Footer</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/hexo/20220911/776348124/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NexT 主題基礎配置（1）－語言、favicon、slidebar、footer 設定 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NexT 主題基礎配置（1）－語言、favicon、slidebar、footer 設定
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-09-11 12:03:18" itemprop="dateCreated datePublished" datetime="2022-09-11T12:03:18+08:00">2022-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-15 10:45:55" itemprop="dateModified" datetime="2022-09-15T10:45:55+08:00">2022-09-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>等選擇好主題後，就可以來配置對應的資料，來看看我怎麼操作吧。</p>
+<span id="more"></span>
+
+<!-- toc -->
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇以我自己在配置時部分遇到的困難、困惑或是有設定的做步驟的紀錄。</p>
+<p><strong>Hexo 版本</strong></p>
+<ul>
+<li>hexo：6.2.0</li>
+<li>hexo-server：3.0.0</li>
+</ul>
+<p><strong>NexT 版本</strong></p>
+<ul>
+<li>NexT：^8.12.1</li>
+</ul>
+<h2 id="語言設置"><a href="#語言設置" class="headerlink" title="語言設置"></a>語言設置</h2><p>因為我是使用繁體中文，所以如果有特別想要設定的語言，可以透過參考資料的連結，確認是否有該語言，再進行設定。</p>
+<ol>
+<li>Hexo config file <code>_config.yml</code> -&gt; <code>language: zh-TW</code></li>
+<li>NexT config file <code>_config.next.yml</code> -&gt; <code>language: zh-TW</code></li>
+</ol>
+<p>參考資料：<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/theme-settings/internationalization.html">internationalization</a></p>
+<h2 id="配置-favicon"><a href="#配置-favicon" class="headerlink" title="配置 favicon"></a>配置 favicon</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><ol>
+<li>至 <code>node_modules/hexo-theme-next/source/images</code> 取代圖片</li>
+<li><code>hexo s</code></li>
+<li>ctrl+shift+r 清除快取</li>
+</ol>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><ol>
+<li>至 <code>source/</code> 新增 <code>images</code> 資料夾</li>
+<li>把所需的圖檔都放置於此資料夾中 <code>source\images</code></li>
+<li>至 <code>_config.next.yml</code> 搜尋 favicon，確認路徑是否正確<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon-16x16-next.ico</span><br><span class="line">  medium: /images/favicon-32x32-next.ico</span><br><span class="line">  apple_touch_icon: /images/apple-touch-icon-next.jpg</span><br><span class="line">  safari_pinned_tab: /images/logo.jpg</span><br></pre></td></tr></table></figure>
+<img src="https://i.imgur.com/VRrIUIK.png" alt="Image"></li>
+<li><code>hexo s</code> 確認是否有出現對應的 favicon <img src="https://i.imgur.com/COXPnRK.png" alt="Image"></li>
+</ol>
+<p>推薦方法二，主要是因為方法一如果重新安裝的話，圖片都會被洗掉，蠻容易需要重複處理的。</p>
+<h2 id="配置大頭貼"><a href="#配置大頭貼" class="headerlink" title="配置大頭貼"></a>配置大頭貼</h2><p>最重要的步驟把<strong>大頭貼切成正方形</strong>。<br>我是使用 Hexo directory 的方式，透過底下的參考資料也能選擇自己想用的方式。<img src="https://i.imgur.com/P89bcnA.png" alt="Image"></p>
+<p>參考資料：<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/theme-settings/sidebar.html#Configuring-Avatar">Configuring-Avatar 配置大頭貼</a></p>
+<h2 id="設置-codeblock"><a href="#設置-codeblock" class="headerlink" title="設置 codeblock"></a>設置 codeblock</h2><ol>
+<li>使用 <a target="_blank" rel="noopener" href="https://theme-next.js.org/highlight/">NexT Highlight Theme Preview.</a>，確認喜歡的主題</li>
+<li>highlight or prismjs 擇一</li>
+<li>theme 黑暗 or 預設模式都要設定</li>
+<li><code>hexo s</code></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/theme-settings/miscellaneous.html#Codeblock-Style">參考資料</a></p>
+<h2 id="Slidebar"><a href="#Slidebar" class="headerlink" title="Slidebar"></a>Slidebar</h2><p>像是 <a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/theme-settings/sidebar.html">Slidebar</a> 想要放左邊或是右邊，還有間距大小、你期望放置的 social media link and icon 都可以在這邊找到</p>
+<h2 id="Footer"><a href="#Footer" class="headerlink" title="Footer"></a>Footer</h2><p><img src="https://i.imgur.com/iAn3wZl.png" alt="Image"><br><a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/theme-settings/footer.html">Footer</a> 主要就是這底下的文字，還有設定你的部落格開始年分，還有那顆愛心的樣式。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/NexT/" rel="tag"><i class="fa fa-tag"></i> NexT</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/git/20220910/294526857/" rel="prev" title="快速免下載，找到 Github Code">
+                  <i class="fa fa-chevron-left"></i> 快速免下載，找到 Github Code
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/hexo/20220912/3484655650/" rel="next" title="NexT 主題配置（2）－自訂頁面、404">
+                  NexT 主題配置（2）－自訂頁面、404 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.2/algoliasearch-lite.umd.js" integrity="sha256-dImjLPUsG/6p3+i7gVKBiDM8EemJAhQ0VvkRK2pVsQY=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.49.1/instantsearch.production.min.js" integrity="sha256-3s8yn/IU/hV+UjoqczP+9xDS1VXIpMf3QYRUi9XoG0Y=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

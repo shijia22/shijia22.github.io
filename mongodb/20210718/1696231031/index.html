@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本篇不算是 Bug 也不算是什麼大問題，但是還是紀錄一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB 在 Mac 運行時狀況記錄">
+<meta property="og:url" content="https://shijia22.github.io/mongodb/20210718/1696231031/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="本篇不算是 Bug 也不算是什麼大問題，但是還是紀錄一下。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2021-07-18T08:32:44.000Z">
+<meta property="article:modified_time" content="2022-09-06T10:46:51.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="MacOS">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/mongodb/20210718/1696231031/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/mongodb/20210718/1696231031/","path":"mongodb/20210718/1696231031/","title":"MongoDB 在 Mac 運行時狀況記錄"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MongoDB 在 Mac 運行時狀況記錄 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%84%E5%8E%9F"><span class="nav-number">2.</span> <span class="nav-text">還原</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%98%97%E8%A9%A6"><span class="nav-number">3.</span> <span class="nav-text">嘗試</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA"><span class="nav-number">4.</span> <span class="nav-text">解決</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">5.</span> <span class="nav-text">結論</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/mongodb/20210718/1696231031/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MongoDB 在 Mac 運行時狀況記錄 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB 在 Mac 運行時狀況記錄
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-07-18 16:32:44" itemprop="dateCreated datePublished" datetime="2021-07-18T16:32:44+08:00">2021-07-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-06 18:46:51" itemprop="dateModified" datetime="2022-09-06T18:46:51+08:00">2022-09-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mongodb/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本篇不算是 Bug 也不算是什麼大問題，但是還是紀錄一下。</p>
+<span id="more"></span>
+
+<!-- toc -->
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>剛好這陣子已經來到偏後端的學習，在學期 2–3 中，學到了 Mongoose DB 這件事。<br>而在從 0 ~ 1 建立專案時，設置資料庫的連線就相對重要，有看到教案中有一句以下一句重點：</p>
+<blockquote>
+<p>使用 macOS 的同學，如果不小心把資料庫伺服器的終端機頁面關掉，需要再用指令重新啟動。</p>
+</blockquote>
+<p>沒錯啦！我當時認為這句話很大的重點是「<strong>關掉終端機</strong>」**&#x3D;<strong>「</strong>資料庫伺服器關閉<strong>」，是必須要</strong>同時**開著「資料庫伺服器的終端機」及「專案的終端機」。但在我練習時，這個狀況似乎不同，甚至我懷疑人生的覺得是不是我又碰到神奇的特殊狀況了 QAQ，因此就趕快向助教詢問。</p>
+<h2 id="還原"><a href="#還原" class="headerlink" title="還原"></a>還原</h2><p>沒有使用另一個終端機做「重新啟動伺服器步驟」，但在 run 專案的終端機中還是有顯示 mongodb connected!<br><img src="https://miro.medium.com/max/1168/1*oUrP7x3nwOEEJGcFXq-Csw.png"></p>
+<p class="image-caption">只使用 npm run dev</p>
+
+<p>從開啟專案至 <code>npm run dev</code> 前，電腦沒有關機，只有闔上螢幕（意即：睡眠狀態），只有開啟一個 run 專案的終端機之下，但成功連上 DB ！</p>
+<h2 id="嘗試"><a href="#嘗試" class="headerlink" title="嘗試"></a>嘗試</h2><p>提問後嘗試了助教提供的指令 <code>ps</code><br><img src="https://miro.medium.com/max/1394/0*-ZPRpxAGdLjYhYJw.png"></p>
+<p class="image-caption">第一行是指開啟終端機輸入/
+第二行是輸入啟動 DB 指令後輸入</p>
+
+<p>並透過 <code>lsof -i -n | grep LISTEN</code><br><img src="https://miro.medium.com/max/1174/1*GIP37ZhKkzGr2rcIuE4Vuw.png"></p>
+<p class="image-caption">發現 mongod 還在運行中</p>
+
+<h2 id="解決"><a href="#解決" class="headerlink" title="解決"></a>解決</h2><p>後來就將所有程式 command + Q 結束，並重新啟動電腦。</p>
+<p>再輸入一次 <code>ps</code> &amp; <code>lsof -i -n | grep LISTEN</code> 指令並透過 monitor（活動監視器）就發現 mogod 沒有在背景運作了。<br><img src="https://miro.medium.com/max/700/1*F2X1qjJT-b_GTKoU7yeKkA.png"></p>
+<p class="image-caption">monitior</p>
+
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><div class="note success"><p>而根據這幾點，助教補充說明：使用 mongod 啟動 MongoDB 時，如果沒有在終端機停止 mongod，那關掉終端機也不會結束 MongoDB。</p>
+</div>
+
+<p>所以，mac 用戶如果真的要結束 MongoDB 要記得在終端機做終止，而非只有單純的關掉終端機。</p>
+<details class="note info no-icon"><summary><p>後記</p>
+</summary>
+<p><img src="https://miro.medium.com/max/1358/1*16ku2_IINTsVkt4cBJoDFA.png"><br>我一定要說一下這個提問原本是膽戰心驚的，想著自己不知道哪裡有問題，可是又很想了解背後原理，殊不知討論到後面，是助教溫柔的說聲感謝 QAQ 整個眼淚大噴發，終於感受到好的提問是教學相長，還有彼此進步！</p>
+
+</details>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MacOS/" rel="tag"><i class="fa fa-tag"></i> MacOS</a>
+              <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i> MongoDB</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/heroku/20210702/1824578086/" rel="prev" title="解決 Warning: heroku update available from 7.53.0 to 7.56.0. 問題">
+                  <i class="fa fa-chevron-left"></i> 解決 Warning: heroku update available from 7.53.0 to 7.56.0. 問題
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/learnexp/20211001/2783098301/" rel="next" title="Simple Twitter 專案寫下的故事">
+                  Simple Twitter 專案寫下的故事 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.2/algoliasearch-lite.umd.js" integrity="sha256-dImjLPUsG/6p3+i7gVKBiDM8EemJAhQ0VvkRK2pVsQY=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.49.1/instantsearch.production.min.js" integrity="sha256-3s8yn/IU/hV+UjoqczP+9xDS1VXIpMf3QYRUi9XoG0Y=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

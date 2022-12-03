@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="進入 ALPHA Camp 全端開發學期，迎來最重要的大項目。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Simple Twitter 專案寫下的故事">
+<meta property="og:url" content="https://shijia22.github.io/learnexp/20211001/2783098301/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="進入 ALPHA Camp 全端開發學期，迎來最重要的大項目。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2021-10-01T09:52:50.000Z">
+<meta property="article:modified_time" content="2022-09-06T10:46:49.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="課後心得">
+<meta property="article:tag" content="ALPHA Camp">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/learnexp/20211001/2783098301/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/learnexp/20211001/2783098301/","path":"learnexp/20211001/2783098301/","title":"Simple Twitter 專案寫下的故事"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Simple Twitter 專案寫下的故事 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E8%AA%AA%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">專案說明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A9%E7%A8%AE%E8%A7%92%E8%89%B2%E6%AC%8A%E9%99%90"><span class="nav-number">2.1.</span> <span class="nav-text">兩種角色權限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B6%E6%95%85%E4%BA%8B"><span class="nav-number">2.2.</span> <span class="nav-text">用戶故事</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%96%8B%E5%A7%8B"><span class="nav-number">3.</span> <span class="nav-text">如何開始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E4%BD%9C%E6%A5%AD"><span class="nav-number">4.</span> <span class="nav-text">前置作業</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%94%E4%BD%9C%E5%B7%A5%E5%85%B7"><span class="nav-number">5.</span> <span class="nav-text">協作工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%96%8B%E7%99%BC%E9%81%8E%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">開發過程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%B2%E5%8A%87%E5%8C%96%E7%9A%84%E5%8D%94%E4%BD%9C"><span class="nav-number">6.1.</span> <span class="nav-text">戲劇化的協作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Flow"><span class="nav-number">6.2.</span> <span class="nav-text">Git Flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8B%95%E9%9D%9C%E6%85%8B%E5%88%87%E7%89%88"><span class="nav-number">6.3.</span> <span class="nav-text">動靜態切版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%91%E5%AE%A2%E6%9D%BE%E6%8C%91%E6%88%B0"><span class="nav-number">7.</span> <span class="nav-text">黑客松挑戰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90%E8%88%87%E6%84%9F%E8%AC%9D%E6%99%82%E9%96%93"><span class="nav-number">8.</span> <span class="nav-text">總結與感謝時間</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%A5%E8%A6%81%E9%80%B2%E8%A1%8C%E5%89%8D%E5%BE%8C%E7%AB%AF%E5%B0%88%E6%A1%88%E5%88%86%E9%9B%A2%E7%9A%84%E5%B0%8F%E7%B4%B0%E7%AF%80"><span class="nav-number">8.1.</span> <span class="nav-text">若要進行前後端專案分離的小細節</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E5%8F%83%E8%80%83%E4%B9%8B%E8%99%95"><span class="nav-number">8.1.1.</span> <span class="nav-text">可參考之處</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E9%96%8B%E5%A7%8B%E5%89%8D%E6%B3%A8%E6%84%8F%E4%B9%8B%E8%99%95"><span class="nav-number">8.1.2.</span> <span class="nav-text">專案開始前注意之處</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%80%9D"><span class="nav-number">9.</span> <span class="nav-text">反思</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%84%AA%E8%B3%AA%E7%9A%84%E9%83%A8%E5%88%86"><span class="nav-number">9.1.</span> <span class="nav-text">優質的部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%94%B9%E9%80%B2%E4%B9%8B%E8%99%95"><span class="nav-number">9.2.</span> <span class="nav-text">可改進之處</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E6%9E%9C"><span class="nav-number">10.</span> <span class="nav-text">成果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%8C%E8%A8%98"><span class="nav-number">11.</span> <span class="nav-text">後記</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/learnexp/20211001/2783098301/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Simple Twitter 專案寫下的故事 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Simple Twitter 專案寫下的故事
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-10-01 17:52:50" itemprop="dateCreated datePublished" datetime="2021-10-01T17:52:50+08:00">2021-10-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-06 18:46:49" itemprop="dateModified" datetime="2022-09-06T18:46:49+08:00">2022-09-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/learnexp/" itemprop="url" rel="index"><span itemprop="name">學習經驗</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>進入 ALPHA Camp 全端開發學期，迎來最重要的大項目。</p>
+<span id="more"></span>
+
+<!-- toc -->
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>不知不覺學程式就半年過去了，為了要銜接進度硬著頭皮開啟了學期三（還是封測班），帶著我真的可以嗎的心情，就這樣完成了兩週的開發，在本次開發中擔任前端及組長的身分。</p>
+<blockquote>
+<p>若想快速了解主要實作內容，可跳至<a href="https://shijia22.github.io/20211001/2783098301/#%E5%A6%82%E4%BD%95%E9%96%8B%E5%A7%8B">如何開始</a>，或是<a href="https://shijia22.github.io/20211001/2783098301/#%E6%88%90%E6%9E%9C">專案成果</a>。</p>
+</blockquote>
+<h2 id="專案說明"><a href="#專案說明" class="headerlink" title="專案說明"></a>專案說明</h2><blockquote>
+<p>前端 - 需要 100% 還原 UI&#x2F;UX 設計稿<br>後端 - 需要 100% 通過測試<br>成果 App - 需要 100% 通過測試計畫表</p>
+</blockquote>
+<h3 id="兩種角色權限"><a href="#兩種角色權限" class="headerlink" title="兩種角色權限"></a>兩種角色權限</h3><ul>
+<li>使用者：可以登入App前台頁面，使用前台功能，無法登入後台管理頁面</li>
+<li>管理者：可以登入App後台頁面，使用後台管理功能，無法登入前台頁面</li>
+</ul>
+<h3 id="用戶故事"><a href="#用戶故事" class="headerlink" title="用戶故事"></a>用戶故事</h3><details>
+  <summary>註冊/登入/登出</summary>
+
+<ul>
+<li>除了註冊和登入頁，使用者一定要登入才能使用網站</li>
+<li>註冊時，使用者可以設定 account、name、email 和 password</li>
+<li>使用者能編輯自己的 account、name、email 和 password</li>
+<li>註冊時，account 和 email 不能與其他人重覆，若有重覆會跳出錯誤提示</li>
+<li>使用者能編輯自己的暱稱、自我介紹、個人頭像與封面</details></li>
+</ul>
+<details>
+  <summary>貼文留言</summary>
+
+<ul>
+<li>使用者能在首頁瀏覽所有的推文 (tweet)</li>
+<li>使用者點擊貼文方塊時，能查看該則貼文的詳情與回覆串</li>
+<li>使用者點擊貼文中的留言 icon 時，能回覆別人的推文</li>
+<li>點擊貼文中使用者頭像時，能瀏覽該使用者的個人資料及推文</li>
+<li>使用者能新增推文</details></li>
+</ul>
+<details>
+  <summary>使用者互動</summary>
+
+<ul>
+<li>使用者可以追蹤&#x2F;取消追蹤其他使用者 (不能追蹤自己)</li>
+<li>使用者能對別人的推文按 Like&#x2F;Unlike</li>
+<li>使用者能編輯自己的名稱、介紹、大頭照和個人頁橫幅背景</details></li>
+</ul>
+<details>
+  <summary>數據摘要</summary>
+
+<ul>
+<li>任何登入使用者都可以瀏覽特定使用者資料</li>
+<li>推文(Tweets)：排序依日期，最新的在前</li>
+<li>推文與回覆：使用者回覆過的內容，排序依日期，最新的在前</li>
+<li>跟隨中 (Following)：該使用者的關注清單，排序依照追蹤紀錄成立的時間，愈新的在愈前面</li>
+<li>跟隨者 (Follower)：該使用者的跟隨者清單，排序依照追蹤紀錄成立的時間，愈新的在愈前面</li>
+<li>喜歡的內容 (Like)：該使用者 like 過的推文清單，排序依 like 紀錄成立的時間，愈新的在愈前面</li>
+<li>使用者能在首頁的側邊欄，看見跟隨者 (followers) 數量排列前 10 的使用者推薦名單</details></li>
+</ul>
+<details>
+  <summary>後台</summary>
+
+<ul>
+<li>管理者可從專門的後台登入頁面進入網站後台</li>
+<li>管理者帳號不可登入前台，詳見【角色權限】說明</li>
+<li>若使用管理帳號登入前台，或使用一般使用者帳號登入後台，等同於「帳號不存在」</li>
+<li>管理者可以瀏覽全站的 Tweet 清單</li>
+<li>可以直接在清單上快覽 Tweet 的前 50 個字</li>
+<li>可以在清單上直接刪除任何人的推文</li>
+<li>管理者可以瀏覽站內所有的使用者清單，清單的資訊包括</li>
+<li>使用者社群活躍數據，包括推文 (tweet) 數量、關注人數、跟隨者人數、推文被 like 的數量</li>
+<li>清單預設按推文數排序</details></li>
+</ul>
+<details>
+<summary>種子資料設計（屬後端）</summary>
+</details>
+
+<h2 id="如何開始"><a href="#如何開始" class="headerlink" title="如何開始"></a>如何開始</h2><p>到了進入開始專案前一週，會提供分組問卷，讓大家自行找組員，鼓勵自動代替被動的方式，不過其實大家多半都不太熟悉，而原本預設會是填完問券後 AC 會依照每個人的學習狀態做分組，但透過問卷題目中可以理解到每個人對於參與這個專案的心，好像也是挺不錯的！</p>
+<p>不過填完問券後，我比較處於被動狀態，擔心著會不會無法一組，雖然前端人數很少，自認很菜，所以有各式小劇場誕生。</p>
+<p>而過了幾小時後，終於有同學（後端）詢問我，簡單聊一下以後，就變成我去詢問合適的前端夥伴，而他進行後端的組員找尋，找組員並且等回覆的心情真的是像是雲霄飛車一樣，像極愛情（?）。不過後端組員的神奇故事又是另一段我們常常拿來說嘴的回憶了。</p>
+<h2 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h2><p>在確定且提交組別後，我們自行創立了 slack 為主要的溝通渠道，並且於說明會前有第一次的線上開會，並使用 jitsi 當作第一次開會線上工具。</p>
+<blockquote>
+<p>當初會使用 jitsi 契機其實是因為組員已經透過教案自行架設一個伺服器，所以就入手這個新工具，崇拜了一番。</p>
+</blockquote>
+<p>在這之前因為找齊了組員大家很迷惘，因此 AC 也提出了需要選出一名小組長，當時因為我自己不太會搞消失加上工作背景關係所以 Maybe 能勝任這件事情，就自告奮勇了。</p>
+<p>因此專案開跑前的第一次會議由我訂定了主要議程，並且請夥伴們提出其他有想到的內容。</p>
+<p>而在開跑前有<strong>第一次</strong>的會議是為了：</p>
+<ol>
+<li>確認專案目標</li>
+<li>確定日後主要協作工具</li>
+<li>為期兩週專案固定開會時間</li>
+</ol>
+<p>訂定這三項主要是因為大家習慣的工具不同，雖然只有短短兩周但在短時間內需要磨合、溝通會是耗費心力的關鍵，因此說好協作流程後，更可以不用靠通靈方式完成專案。</p>
+<p>當時除了既有溝通渠道及線上會議工具選定後，我們還依照任務指示使用了 Trello、Google Sheet 為輔，大家可以理解目前進度到哪裡。</p>
+<p><img src="https://miro.medium.com/max/1400/1*5u0Ni-UT1aDFe5ew0xvEmg.png"></p>
+<p class="image-caption">使用 Trello 為進度安排</p>
+
+<h2 id="協作工具"><a href="#協作工具" class="headerlink" title="協作工具"></a>協作工具</h2><p>特別說明協作工具主要是大概符合 Agile 精神，分配各階段工作</p>
+<ul>
+<li><strong>Trello</strong>：我主要是先按照過往學長姐協作時的分工主要分成 To do, Blocked by, Developing, Done, To revise, Merged, Deployed, Optimize 看板，最後不管因為前端多半需要參照的是 Sheet 表上的 Data 或是 router，而後端多半在上 Trello 前已經完成相關工作，最後 Trello 變成只有放不想被洗掉的文件、紀錄。</li>
+<li><strong>Google sheet</strong>：拆分成前後端各自的頁面，確認分工的狀況及負責的區域，也有後端分頁用來讓前端確認 controller owner 是誰及測試 API，最後還有一張表是用來讓前端向後端許願的項目。</li>
+</ul>
+<p>在第一次會議確認內容後，就交由<strong>前後端各自討論出分工</strong>整理進 Google Sheet 中，下方圖片是前端的拆分頁面，依照路由區分頁面、其次確認頁面的原件還有資料，更能確認彼此是否有遺漏<br><img src="https://miro.medium.com/max/1400/1*W457xlLHUnU3RwmzOpUeNQ.png"></p>
+<h2 id="開發過程"><a href="#開發過程" class="headerlink" title="開發過程"></a>開發過程</h2><p>一開始前端有製作元件、資料分析，讓整體開發及溝通可以更加順利，也能透過助教回饋讓專案開發前有點心理準備<br><img src="https://miro.medium.com/max/1400/0*qZrOu3N3DIMD4nO-.png"></p>
+<p class="image-caption">component tree</p>
+
+<p>收到分析設計稿元件後，原本因為大量的頁面跟元件，當時還有其他作業進度卡關，真的很想一拳打死自己。<br><img src="https://miro.medium.com/max/1400/1*gAk_RuHReQ6H_gP-qy7qAw.png"></p>
+<p class="image-caption">Figma 畫面分析紀錄</p>
+
+<p>分析的步驟我是先從 Figma UI 設計圖如下的方式，按照區域先理解「<strong>設計稿</strong>」在做甚麼，在將頁面使用 drawio 把元件劃分出來，整理清楚「<strong>共用元件</strong>」，最後使用 google 簡報將所有頁面整合做一輪的仔細確認。<br><img src="https://miro.medium.com/max/1400/1*Olofs5nn0kEgkOH6WPYc2w.png"></p>
+<p class="image-caption">Google 簡報示意</p>
+
+<p>而進入到簡報的分析時，也將「路由」大致的分析、想過，更於確認之後開發會是怎樣動工，跳轉頁面確認元件也是非常方便的一件事情！</p>
+<p>再來專案開始後，就與前端夥伴討論各自認領的區塊，先將前後台分配，由另一位夥伴進行後台頁面處理，我開始著手進行前台元件簡單區塊，還有共同元件處理。</p>
+<p><strong>主要製作：前台、推文及共用相關元件。</strong><br><img src="https://miro.medium.com/max/1136/1*tkpVu1tnMM_1iaK90qw7Fg.png"></p>
+<p class="image-caption">配上偶爾切到瘋狂的 Me</p>
+
+<h3 id="戲劇化的協作"><a href="#戲劇化的協作" class="headerlink" title="戲劇化的協作"></a>戲劇化的協作</h3><p>剛好我跟前端夥伴各自使用不同的開發環境，偏偏 npm 對於 Windows 又稍微有點不友善，所以就遇到第一級「<strong>npm 版本衝突</strong>」（但我們 Node.js 版本一致），慶幸先前我有遇過這個 npm 版本不符的狀況，只好請夥伴先將 npm 降級，讓專案得以進行。</p>
+<h3 id="Git-Flow"><a href="#Git-Flow" class="headerlink" title="Git Flow"></a>Git Flow</h3><p><img src="https://miro.medium.com/max/1400/1*qIUJa8KiFqfATC2e5L0gAA.png"></p>
+<p>依照教案，我們事前有進行演練，剛好工作環境關係對於 Git 掌控稍微熟練，因此上手很快。</p>
+<p>採用由 Develop 另開分支，開發完成推上 GitHub 發 PR 後，由另一人進行 code review 及 merge。每次 merge 完都會回到本地 main 進行 git pull 再開分支開發。</p>
+<p>不過前端因為共用元件多的關係，所以 PR 需要更認真看，且在 PR 前我都會讓夥伴先發 PR ，由我統一解衝突，降低重工、Bug 發生。</p>
+<h3 id="動靜態切版"><a href="#動靜態切版" class="headerlink" title="動靜態切版"></a>動靜態切版</h3><p><img src="https://miro.medium.com/max/1400/1*cEeXyl5_rjo9A-pe9cO8rQ.png"></p>
+<p>舉個例子，靜態上我們可以預期自己想要填入什麼樣的資料擴充怎樣的版位，而同時就需要預期接下來使用者會如何操作彈跳視窗，預想到這樣的畫面裡高度、字數要如何截斷，而讓每個畫面看起來一致。</p>
+<p>像是紅框中的範圍，使用者大頭貼下的灰色直條，會依照使用者推文的長度有不一樣的變化，但也讓整體使用者上方高度達到一致。</p>
+<h2 id="黑客松挑戰"><a href="#黑客松挑戰" class="headerlink" title="黑客松挑戰"></a>黑客松挑戰</h2><p>挑戰功能分為三階段：公開聊天室、私訊聊天、即時通知，而每個階段又有各自的 level，主要目標都是讓使用者可以即時聊天。</p>
+<p>因為當時經歷了基本功能的摧殘，所以我們組採且戰且走的狀態，做多少算多少，不過至少要完成挑戰一。</p>
+<p>而這次我在挑戰一是先屬於靜態切版，由另一位前端夥伴做資料連接（真的辛苦她了！）我們當時真的像是馬拉松一樣，掛機掛一整天，會跟夥伴回報一下目前狀態再繼續努力。<br><img src="https://miro.medium.com/max/1400/1*baQgkIZ1Es0_FB9INsREOw.png"></p>
+<p>黑客松挑戰是一個讓團隊建立革命情感的挑戰，不過也很容易破碎（如果遇到挫折），不熟悉的語法及 <a target="_blank" rel="noopener" href="http://socket.io/">socket.io</a> 真的很讓人崩潰！尤其前端 Vue 很少相關教學文章，原以為沒希望，是透過大家的努力與堅持，還有那兩天持續性的通話得以繼續。</p>
+<p>到了挑戰一完成的那一刻，欣喜若狂，且想著怎樣優化會更好。雖然最後在繳交期限內我們只交了挑戰一，挑戰二尚在努力當中，不過從 0 到 1 且跟夥伴共同努力的過程真的非常難能可貴。</p>
+<p>喔對了，不管是後端等前端還是前端中場找資料的時間，我們還會自主時況轉播看看是否有其他組同學可以觀摩了，我想這就是苦中作樂的最高境界。</p>
+<p>而黑客松需要注意的細節就是：<strong>意志力</strong>、<strong>資料能力</strong>。</p>
+<p>這兩者缺一不可，少了意志力會少了對團隊的榮譽感也不知道為什麼而挑戰；而找資料能力也是工程師最不可或缺的能力，那種翻遍各大社群找到解法的喜悅感。</p>
+<h2 id="總結與感謝時間"><a href="#總結與感謝時間" class="headerlink" title="總結與感謝時間"></a>總結與感謝時間</h2><p>將這次專案完成要感謝前幾天就完成後端 API 讓我們前端不用煩惱 data 的後端夥伴 Wison、Bobo，還有前端夥伴 Jill，跟這幾位神人一起協作我只感覺到自己的不足跟需要加強之處，還有一起大聊八卦的時刻（？）。</p>
+<p>每個人都有各自的特性，像是後端多半偏沉穩，只要還沒完成就很難聽到他們的笑聲（還有默默補刀），可是默默地都會出現在前端所有需要他們的時候，真的很讓人懷疑為甚麼每次許願都可以這麼快做出來（!），而前端夥伴雖然是媽媽，但泡在椅子上一同跟我們解 Bug 與討論的時間很長，還有時不時強烈想畢業的慾望好生佩服。還有從學期三開始就是我的導師的 Frank ，分享很多實務應用上的經驗，總是在 slack 上主動詢問進度而非我主動回報😂。</p>
+<p>思考了一輪，這整組好像與前後端選擇的個性不謀而合，非常有趣。</p>
+<h3 id="若要進行前後端專案分離的小細節"><a href="#若要進行前後端專案分離的小細節" class="headerlink" title="若要進行前後端專案分離的小細節"></a>若要進行前後端專案分離的小細節</h3><h4 id="可參考之處"><a href="#可參考之處" class="headerlink" title="可參考之處"></a>可參考之處</h4><ul>
+<li>組長的串聯還有日常性溝通很重要，將不熟的大加串聯很重要。</li>
+<li>事前溝通協作默契，集中大家問題便於處理，不會四散各地。</li>
+<li>不管前後端，都需要新增負責元件或 API 的人，可以及時找對人。</li>
+</ul>
+<h4 id="專案開始前注意之處"><a href="#專案開始前注意之處" class="headerlink" title="專案開始前注意之處"></a>專案開始前注意之處</h4><ul>
+<li>安裝什麼套件，套件甚麼版本</li>
+<li>環境設定，事前確認使用同樣的 npm 版本、要安裝的套件等 etc…</li>
+<li>前後端各自有的「特定規格」說清楚，前端會有資料渲染的考量，後端會有測試規格的考量，雙方面臨的驗收規格不太一樣。e.g. 欄位名稱等等</li>
+</ul>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><h3 id="優質的部分"><a href="#優質的部分" class="headerlink" title="優質的部分"></a>優質的部分</h3><ol>
+<li>當時有確認組員慣用工具是什麼，並無刻意導入個人習慣性工具，因此不需要特別預留工具熟悉時間。</li>
+<li>大家都在同個時區，有第一次會議決議共識，可以讓後續專案不會特別有障礙。</li>
+<li>有 call 的默契，到了後期基本上我們根本整天在掛機。</li>
+</ol>
+<h3 id="可改進之處"><a href="#可改進之處" class="headerlink" title="可改進之處"></a>可改進之處</h3><ol>
+<li>因為前端在開發上本身比較菜，所以很多時候會有後端等前端，但後端無法協助前端的狀況，會造成夥伴的焦慮感。<br>📌 這個部分很難避免，畢竟前後端需要努力的方向都不同，若身為組長及前端的話且短期開發的話，可以定期截圖頁面狀況回報狀態，讓後端夥伴可以理解目前畫面長相。</li>
+<li>本身自己對於前端框架及 JS 尚不熟悉，所以開發速度較慢，中間還差點忘記其中的元件，導致串 API 稍有 Delay，不過也因當時分組問卷時，我有寫下「不管如何我會完成專案」，還是在不干擾夥伴進度下，努力完成應有進度。<br>📌 事後反思若在不打擾夥伴且可以完成進度下，努力跟夥伴溝通目前進度，可以放心及安心，也體諒夥伴尚未熟悉 Git Flow 可提供多點引導。</li>
+</ol>
+<h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><p><img src="https://miro.medium.com/max/1400/1*fayZRPV_zp0Q3ZLOrDNRDQ.gif"></p>
+<p class="image-caption">專案成果畫面</p>
+
+<ul>
+<li><a href="https://shijia22.github.io/twitter-front-end-vue-2020/#/">專案成果 Page</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/shijia22/twitter-front-end-vue-2020">前端 Repo link</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/shijia22/twitter-api-2020">後端 Repo link</a></li>
+</ul>
+<details class="note info"><summary><p>夥伴們心得</p>
+</summary>
+<p>後端：</p>
+<ul>
+<li>Bobo：<a target="_blank" rel="noopener" href="https://bobolincowo.medium.com/simple-twitter-%E5%B0%88%E6%A1%88%E5%9B%9E%E9%A1%A7-c436b670d949">Simple Twitter 專案回顧</a></li>
+<li>Wilson：<a target="_blank" rel="noopener" href="https://matters.news/@humorous_note/simple-twitter-%E5%B0%88%E6%A1%88%E5%8D%94%E4%BD%9C-bafyreiey6otltadox22s67s77a4ss6sonp2vyuzj65eql4prnwjyjge5hq">Simple Twitter 專案協作</a></li>
+</ul>
+<p>前端：</p>
+<ul>
+<li>Jill：<a target="_blank" rel="noopener" href="https://heathered-handspring-a7f.notion.site/AC-Simple-Twitter-b4e543e40c0d459ca2b2880e824d0c45">AC Simple Twitter 協作專案心得</a></li>
+</ul>
+
+</details>
+
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>雖然最終成果稍有不完美，不過我們神速的修改速度直接佔一個版位紀念！</p>
+<p><img src="https://miro.medium.com/max/1400/1*v85ELPuZJZG-RuCxD3S8kg.png"></p>
+<p class="image-caption">超速 ヾ(•ω•`)o</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AA%B2%E5%BE%8C%E5%BF%83%E5%BE%97/" rel="tag"><i class="fa fa-tag"></i> 課後心得</a>
+              <a href="/tags/ALPHA-Camp/" rel="tag"><i class="fa fa-tag"></i> ALPHA Camp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/mongodb/20210718/1696231031/" rel="prev" title="MongoDB 在 Mac 運行時狀況記錄">
+                  <i class="fa fa-chevron-left"></i> MongoDB 在 Mac 運行時狀況記錄
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/vue/20211004/1905090687/" rel="next" title="使用 Vue2 + SCSS 建立專案筆記">
+                  使用 Vue2 + SCSS 建立專案筆記 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.2/algoliasearch-lite.umd.js" integrity="sha256-dImjLPUsG/6p3+i7gVKBiDM8EemJAhQ0VvkRK2pVsQY=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.49.1/instantsearch.production.min.js" integrity="sha256-3s8yn/IU/hV+UjoqczP+9xDS1VXIpMf3QYRUi9XoG0Y=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

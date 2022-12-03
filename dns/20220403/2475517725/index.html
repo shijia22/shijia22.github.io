@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.14.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="先前不知道為什麼 DNS 產生 DNS_PROBE_FINISHED_NXDOMAIN 此錯誤，所以有了這個筆記！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修復 DNS 錯誤問題">
+<meta property="og:url" content="https://shijia22.github.io/dns/20220403/2475517725/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="先前不知道為什麼 DNS 產生 DNS_PROBE_FINISHED_NXDOMAIN 此錯誤，所以有了這個筆記！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2022-04-03T02:47:46.000Z">
+<meta property="article:modified_time" content="2022-09-06T10:50:28.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="環境設定與指令">
+<meta property="article:tag" content="Dns">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/dns/20220403/2475517725/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/dns/20220403/2475517725/","path":"dns/20220403/2475517725/","title":"修復 DNS 錯誤問題"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>修復 DNS 錯誤問題 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F"><span class="nav-number">2.</span> <span class="nav-text">操作步驟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%A1%E5%AF%A6%E9%9A%9B%E8%BC%B8%E5%85%A5%E6%8C%87%E4%BB%A4%E7%9A%84%E6%A8%A3%E5%AD%90%E8%B7%9F%E6%96%87%E7%AB%A0%E9%99%84%E5%9C%96%E4%B8%8D%E4%B8%80%E6%A8%A3"><span class="nav-number">3.</span> <span class="nav-text">💡實際輸入指令的樣子跟文章附圖不一樣</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/dns/20220403/2475517725/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="修復 DNS 錯誤問題 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          修復 DNS 錯誤問題
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-04-03 10:47:46" itemprop="dateCreated datePublished" datetime="2022-04-03T10:47:46+08:00">2022-04-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-09-06 18:50:28" itemprop="dateModified" datetime="2022-09-06T18:50:28+08:00">2022-09-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/dns/" itemprop="url" rel="index"><span itemprop="name">DNS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>先前不知道為什麼 DNS 產生 <code>DNS_PROBE_FINISHED_NXDOMAIN</code> 此錯誤，所以有了這個筆記！</p>
+<span id="more"></span>
+
+<!-- toc -->
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>因為這篇 title 我直接把錯誤問題放在文章標題，還產生首頁跑版的問題 QQ</p>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><ol>
+<li>輸入 <code>ipconfig/release</code> 並按 Enter 鍵。這會釋放你當前的 IP 地址。<br><img src="https://i.imgur.com/0AAGo6D.png" alt="Image"></li>
+<li>輸入 <code>ipconfig/flushdns</code> 並按 Enter 鍵。這將會更新本地端的 DNS 快取。<br><img src="https://i.imgur.com/EmI4piE.png" alt="Image"></li>
+<li>輸入 <code>ipconfig/renew</code> 並按 Enter鍵。這將會更新你的 IP 地址。<br><img src="https://i.imgur.com/VLbmk0g.png" alt="Image"></li>
+</ol>
+<h2 id="💡實際輸入指令的樣子跟文章附圖不一樣"><a href="#💡實際輸入指令的樣子跟文章附圖不一樣" class="headerlink" title="💡實際輸入指令的樣子跟文章附圖不一樣"></a>💡實際輸入指令的樣子跟文章附圖不一樣</h2><p>我的參考資料在下方，不過有遇到部分附圖與實際操作不太一樣。</p>
+<p>參考資料：<a target="_blank" rel="noopener" href="https://networker.tw/dns-probe-finished-nxdomain/">如何修復 DNS_PROBE_FINISHED_NXDOMAIN 錯誤？</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Windows/" rel="tag"><i class="fa fa-tag"></i> Windows</a>
+              <a href="/tags/%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A%E8%88%87%E6%8C%87%E4%BB%A4/" rel="tag"><i class="fa fa-tag"></i> 環境設定與指令</a>
+              <a href="/tags/Dns/" rel="tag"><i class="fa fa-tag"></i> Dns</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/vue/20220402/2072832358/" rel="prev" title="解決 DevTool 突然無法顯示 Vue 問題">
+                  <i class="fa fa-chevron-left"></i> 解決 DevTool 突然無法顯示 Vue 問題
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/officenotes/20220828/3532849752/" rel="next" title="從組織架構看企業">
+                  從組織架構看企業 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.2/algoliasearch-lite.umd.js" integrity="sha256-dImjLPUsG/6p3+i7gVKBiDM8EemJAhQ0VvkRK2pVsQY=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.49.1/instantsearch.production.min.js" integrity="sha256-3s8yn/IU/hV+UjoqczP+9xDS1VXIpMf3QYRUi9XoG0Y=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
