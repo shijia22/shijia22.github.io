@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha256-/4UQcSmErDzPCMAiuOiWPVVsNN2s3ZY/NsmXNcj0IFc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="主要記錄自己不熟悉的軟體但又期望自動化的實作過程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="實現 Jira 與 Slack 串聯自動化筆記">
+<meta property="og:url" content="https://shijia22.github.io/pdm/20221210/1777865212/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="主要記錄自己不熟悉的軟體但又期望自動化的實作過程。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2022-12-10T11:24:48.000Z">
+<meta property="article:modified_time" content="2022-12-10T11:24:48.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="Jira">
+<meta property="article:tag" content="Slack">
+<meta property="article:tag" content="ProductManager">
+<meta property="article:tag" content="PDM">
+<meta property="article:tag" content="PM">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/pdm/20221210/1777865212/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/pdm/20221210/1777865212/","path":"pdm/20221210/1777865212/","title":"實現 Jira 與 Slack 串聯自動化筆記"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>實現 Jira 與 Slack 串聯自動化筆記 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A8%99"><span class="nav-number">2.</span> <span class="nav-text">目標</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%A9%9F"><span class="nav-number">3.</span> <span class="nav-text">步驟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E4%BD%9C%E6%A5%AD"><span class="nav-number">3.1.</span> <span class="nav-text">前置作業</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jira-%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">Jira 操作</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/pdm/20221210/1777865212/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="實現 Jira 與 Slack 串聯自動化筆記 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          實現 Jira 與 Slack 串聯自動化筆記
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-12-10 19:24:48" itemprop="dateCreated datePublished" datetime="2022-12-10T19:24:48+08:00">2022-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/pdm/" itemprop="url" rel="index"><span itemprop="name">產品經理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>主要記錄自己不熟悉的軟體但又期望自動化的實作過程。</p>
+<span id="more"></span>
+
+<!-- toc -->
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>身為 PM 在處理版本迭代時，不外乎都需要通知新版本上線、新功能來了，確保利害關係人都可以被同步到訊息。<br>本次先以「版本發布」作為實現自動化的起始篇章，解決「上版」時資訊可以同步通知，減少複製貼上的流程，確保都能在第一時間通知 product team。<br>也因目前公司主要使用 Jira 進行開發管理，Slack 用來日常工作的溝通，就一起來看看整個思路的過程吧！</p>
+<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><p>本次主要想解決有幾件事：</p>
+<ol>
+<li>自動化</li>
+<li>資訊同步</li>
+<li>減少往返不同頁籤的時間</li>
+</ol>
+<p>而這三件事情背後都反應了原始的需求，像是通知自動化可以減少人工操作忘記同步的問題，也因自動化的過程可以讓資訊被整合，設置同樣的資訊出口，來打造資訊最終點，確保大家都是從同樣的地方得知資訊。</p>
+<h2 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h2><p>有了先前整合 Asana 的經驗，原本以為在操作自動化上可以比較順利，結果我真的太錯估了。<br>目前公司使用的開發管理軟體是 JIRA，比起 Asana 更像是一個給開發人員用的軟體，而非以專案導向的操作，所以身為 PM 的如果沒有稍微懂點技術，在操作上我認為相對有難度。</p>
+<p><img src="https://i.imgur.com/ATuDEz9.png" alt="Image"></p>
+<h3 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h3><p>首先，雖然是單純的版本綁定的通知，但是過去我們在開發的工單上比較沒有落實工單控制版本這件事，因此事前花了一點時間把近期的版本內容全部都梳理一遍。</p>
+<p>就是為了接下來的版本內容可以一致，準備好讓開發人員「<strong>依單行事</strong>」</p>
+<h3 id="Jira-操作"><a href="#Jira-操作" class="headerlink" title="Jira 操作"></a>Jira 操作</h3><ol>
+<li><p>進入 project 的「版本頁」，會看到有個閃電的符號，點擊後就可以找到本次主要目標，發布版本後傳送訊息。<br><img src="https://i.imgur.com/VvQioUj.png" alt="Image"></p>
+</li>
+<li><p>一開始會進入到規則詳細頁，但基本上這邊操作上都很直覺，可以決定負責人是誰或是規則成功與否是否需要寄送 mail。<br><img src="https://i.imgur.com/ug2Ur8t.png" alt="Image"></p>
+</li>
+<li><p>下一步時，會看到幾個我們一定需要填答的欄位<br><img src="https://i.imgur.com/qESCJmS.png" alt="Image"></p>
+<ol>
+<li><p>必填欄位 - Webhook URL</p>
+<ul>
+<li>點擊後可以看到直接連到 slack 頁面，這時你會需要確認你在 slack 是否有可以新增應用程式的權限，來確保接下來的串聯是順利的。<br><img src="https://i.imgur.com/EiqlNq2.png" alt="Image"></li>
+<li>選擇自己 slack workspace 還有用來通知的頻道 or 私人訊息<br><img src="https://i.imgur.com/fvncVca.png" alt="Image"></li>
+<li>到下個步驟後就可以看到 webhook URL，並點擊複製，於此同時也能異動應用程式 icon or 通知的名稱<br><img src="https://i.imgur.com/fPAA7l5.png" alt="Image"></li>
+</ul>
+<p>到這邊 slack 的操作就告一個段落了！</p>
+</li>
+<li><p>必填欄位 - 訊息<br>可以看到預設的訊息只有版本的名稱還有發布的日期參數，但我知道我期望可以通知到的內容還有版本內的子項目，因此開啟了三個階段的 debug 之路。</p>
+<ul>
+<li>基礎版：使用預設訊息通知<br>具備了<strong>哪個版本</strong> &amp; <strong>發布日期</strong><br><img src="https://i.imgur.com/0kCzppq.png" alt="Image"></li>
+<li>進階版：因為我也想把實際在 Jira 上的專案版本 link 放上來，因此透過原本官方給的參數 + slack 的字樣找到了放上版本 link 的方式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myCompanyUrl/projects/&#123;&#123;version.project.key&#125;&#125;/versions/&#123;&#123;version.id&#125;&#125;/tab/release-report-all-issues</span><br></pre></td></tr></table></figure>
+<code>myCompanyUrl</code> 是整個 Jira 你們所用的網域，記得抽換<br><img src="https://i.imgur.com/2coO9Ck.png" alt="Image"></li>
+</ul>
+<p>哇！看起來很棒對吧，只差一點點了!</p>
+<ul>
+<li><p>精緻版：把版本內的項目都放上去<br>為了達成這個目標，我真的苦惱了一陣子，透過了關鍵字還有 Jira 本身的參考範本，我找到了需要搭配 <code>JQL</code> 才能實現的內容</p>
+<ol>
+<li>準備自己專案的語法 + 參數</li>
+<li>在官方預設的自動化流程新增操作<br><img src="https://i.imgur.com/vzLb51K.png" alt="Image"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">project <span class="operator">=</span> &#123;&#123;version.project.key&#125;&#125; <span class="keyword">AND</span> fixVersion <span class="operator">=</span> &#123;&#123;version.id&#125;&#125; <span class="keyword">ORDER</span> <span class="keyword">BY</span> priority <span class="keyword">DESC</span>, key <span class="keyword">ASC</span></span><br></pre></td></tr></table></figure></li>
+<li>回到下一個步驟的 slack 訊息，加上語法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;#lookupIssues&#125;&#125;</span><br><span class="line">* &lt;&#123;&#123;url&#125;&#125;|&#123;&#123;key&#125;&#125;&gt;: &#123;&#123;summary&#125;&#125;</span><br><span class="line">&#123;&#123;/&#125;&#125;</span><br></pre></td></tr></table></figure>
+成功如下圖：<br><img src="https://i.imgur.com/9VAKyXu.png" alt="Image"></li>
+</ol>
+<p>精緻版的步驟中，最後顯示版本內的 issue 會需要搭配 slack 在處理文字格式時的語法，才會顯示成功，不然會看到一串沒有經過格式化的參數值優！</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p>終於逐步地完成這個自動化通知了！<br>整個操作下來蠻慶幸過去有程式的經驗 + 有段搜尋關鍵字的歷練，因為在開啟成功的旅程前，我只有做到最基本版本，嘗試了半小時後因為工時的關係，就先短暫放棄，果然寫程式 debug 也是這樣 XD。</p>
+<p>期待這個版本通知後帶來的便利與同步，也期待自己下個優化工作流程的筆記。</p>
+<p>參考資料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://community.atlassian.com/t5/Jira-Software-questions/Automation-when-version-released-post-release-notes-to-slack/qaq-p/1415084#M224887">Automation - when version released post release notes to slack</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.atlassian.com/software/jira/automation-template-library/rules#/rule-list?systemLabelId=all&page=1&pageSize=20&sortKey=name&sortOrder=ASC">The Automation Playground</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.atlassian.com/software/jira/automation-template-library/slack-ms-teams">Jira automation templates for Slack or Microsoft Teams</a></li>
+<li><a target="_blank" rel="noopener" href="https://confluence.atlassian.com/automation070/how-to-use-slack-messages-with-automation-for-jira-1014664546.html">How to use Slack Messages with Automation for Jira</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Jira/" rel="tag"><i class="fa fa-tag"></i> Jira</a>
+              <a href="/tags/Slack/" rel="tag"><i class="fa fa-tag"></i> Slack</a>
+              <a href="/tags/ProductManager/" rel="tag"><i class="fa fa-tag"></i> ProductManager</a>
+              <a href="/tags/PDM/" rel="tag"><i class="fa fa-tag"></i> PDM</a>
+              <a href="/tags/PM/" rel="tag"><i class="fa fa-tag"></i> PM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/terminal/20221203/3946746317/" rel="prev" title="解決更新 MacBook Air M2 升级到 macOS Monterey 12.1 後 git 失效問題">
+                  <i class="fa fa-chevron-left"></i> 解決更新 MacBook Air M2 升级到 macOS Monterey 12.1 後 git 失效問題
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/notion/20230101/1407709478/" rel="next" title="How to Move Pages other Workspaces in Notion">
+                  How to Move Pages other Workspaces in Notion <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/4.14.3/algoliasearch-lite.umd.js" integrity="sha256-dyJcbGuYfdzNfifkHxYVd/rzeR6SLLcDFYEidcybldM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/instantsearch.js/4.51.1/instantsearch.production.min.js" integrity="sha256-y6I4MY/blLHk4a7G33zp97DcnBFRY2iMId4FObo8toI=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
