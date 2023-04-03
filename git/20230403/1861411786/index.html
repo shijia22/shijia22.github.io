@@ -20,31 +20,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.15.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Bash 好用歸好用，但一直有個問題上下移動感受不出來到底有沒有在移動，快來看看這次我發現了什麼酷東西！">
+    <meta name="description" content="今天在使用 Git 時不知道為什麼會出現這個錯誤，因此紀錄了一下解決的方式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git Bash 創建 Vue 可以上下移動的神奇關鍵">
-<meta property="og:url" content="https://shijia22.github.io/git/20220218/3190606308/index.html">
+<meta property="og:title" content="解決：Host key verification failed. 的問題">
+<meta property="og:url" content="https://shijia22.github.io/git/20230403/1861411786/index.html">
 <meta property="og:site_name" content="釋迦佛系修練手札">
-<meta property="og:description" content="Bash 好用歸好用，但一直有個問題上下移動感受不出來到底有沒有在移動，快來看看這次我發現了什麼酷東西！">
+<meta property="og:description" content="今天在使用 Git 時不知道為什麼會出現這個錯誤，因此紀錄了一下解決的方式。">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
-<meta property="article:published_time" content="2022-02-18T13:23:36.000Z">
-<meta property="article:modified_time" content="2022-09-06T10:46:54.000Z">
+<meta property="article:published_time" content="2023-04-03T09:08:23.000Z">
+<meta property="article:modified_time" content="2023-04-03T09:08:23.000Z">
 <meta property="article:author" content="釋迦 4+">
-<meta property="article:tag" content="Vue">
-<meta property="article:tag" content="Git Bash">
+<meta property="article:tag" content="MacOS">
+<meta property="article:tag" content="環境設定與指令">
+<meta property="article:tag" content="M1M2">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
 <meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
 
 
-<link rel="canonical" href="https://shijia22.github.io/git/20220218/3190606308/">
+<link rel="canonical" href="https://shijia22.github.io/git/20230403/1861411786/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/git/20220218/3190606308/","path":"git/20220218/3190606308/","title":"Git Bash 創建 Vue 可以上下移動的神奇關鍵"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/git/20230403/1861411786/","path":"git/20230403/1861411786/","title":"解決：Host key verification failed. 的問題"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Git Bash 創建 Vue 可以上下移動的神奇關鍵 | 釋迦佛系修練手札</title>
+<title>解決：Host key verification failed. 的問題 | 釋迦佛系修練手札</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false}</script>
@@ -143,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">錯誤訊息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA%E6%AD%A5%E9%A9%9F"><span class="nav-number">3.</span> <span class="nav-text">解決步驟</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -207,7 +209,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/git/20220218/3190606308/">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/git/20230403/1861411786/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -220,12 +222,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Git Bash 創建 Vue 可以上下移動的神奇關鍵 | 釋迦佛系修練手札">
+      <meta itemprop="name" content="解決：Host key verification failed. 的問題 | 釋迦佛系修練手札">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Git Bash 創建 Vue 可以上下移動的神奇關鍵
+          解決：Host key verification failed. 的問題
         </h1>
 
         <div class="post-meta-container">
@@ -236,14 +238,7 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2022-02-18 21:23:36" itemprop="dateCreated datePublished" datetime="2022-02-18T21:23:36+08:00">2022-02-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2022-09-06 18:46:54" itemprop="dateModified" datetime="2022-09-06T18:46:54+08:00">2022-09-06</time>
+      <time title="創建時間：2023-04-03 17:08:23" itemprop="dateCreated datePublished" datetime="2023-04-03T17:08:23+08:00">2023-04-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,15 +260,31 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Bash 好用歸好用，但一直有個問題上下移動感受不出來到底有沒有在移動，快來看看這次我發現了什麼酷東西！</p>
+        <p>今天在使用 Git 時不知道為什麼會出現這個錯誤，因此紀錄了一下解決的方式。</p>
 <span id="more"></span>
 
 <!-- toc -->
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前剛學 Vue 的時，建立專案都會透過 Git Bash 操作，但 N 次後發現真的非常奇怪，所以後來都改用 VS code 直接操作 XD。</p>
-<p>但就在剛剛，突然發現一個神奇的指令 <code>winpty vue.cmd create hello-world</code> 竟可以神奇的上下移動了！</p>
-<p><img src="https://miro.medium.com/max/1162/1*ein0ePQEgoP-ZY29fNjniQ.gif" alt="成功紀錄"></p>
-<p>後來發現僅有在 Git bash 建立 Vue 專案時 <code>vue create hello-word</code> 改成 <code>winpty vue.cmd create hello-world</code> 才可以成功上下移動，而本質上改的是 Vue 在指令列操作的狀況，不過可以上下移動真的是一大進步。</p>
-<p>參考資料：<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/51297079/vue-cli-arrow-key-not-working-while-creating-new-project-on-git-bash-windows">Vue-cli: arrow key not working while creating new project on git bash windows</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>偶爾在使用 SSH 連線至另一台主機時，可能會出現 “Host key verification failed” 的錯誤訊息，這是由於連線的主機密鑰不符合已知的主機密鑰所導致的。這通常是因為目標主機的 SSH 服務在上次連線後重新生成了密鑰，或是有可能是中間人攻擊的結果。若不處理此問題，您可能會無法安全地連線至目標主機。<br>聽起來很可怕對吧，所以趕快來看看我怎麼處理的！</p>
+<h2 id="錯誤訊息"><a href="#錯誤訊息" class="headerlink" title="錯誤訊息"></a>錯誤訊息</h2><p>VSCode</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host key verification failed.</span><br><span class="line">fatal: Could not <span class="built_in">read</span> from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure>
+
+<p>另外一個訊息是出現在終端機</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span><br><span class="line">Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span><br><span class="line">It is also possible that a host key has just been changed.</span><br><span class="line">The fingerprint <span class="keyword">for</span> the RSA key sent by the remote host is *******</span><br><span class="line">Please contact your system administrator.</span><br><span class="line">Add correct host key <span class="keyword">in</span> /Users/***/.ssh/known_hosts to get rid of this message.</span><br><span class="line">Offending RSA key <span class="keyword">in</span> /Users/***/.ssh/known_hosts:1</span><br><span class="line">Host key <span class="keyword">for</span> github.com has changed and you have requested strict checking.</span><br><span class="line">Host key verification failed.</span><br><span class="line">fatal: Could not <span class="built_in">read</span> from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure>
+
+<h2 id="解決步驟"><a href="#解決步驟" class="headerlink" title="解決步驟"></a>解決步驟</h2><ol>
+<li>步驟一：刪除已知的主機密鑰檔案</li>
+</ol>
+<p>在您的本地端電腦上，開啟您的終端機或命令提示字元，並輸入以下指令，以刪除已知的主機密鑰檔案：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -R &lt;hostname&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;hstname&gt;</code> 是欲連線的目標主機名稱或 IP 位址。<br>像我這邊就是需要填上 github.com</p>
+<ol start="2">
+<li>步驟二：將主機密鑰加入已知的主機密鑰列表</li>
+</ol>
+<p>當您已經驗證過目標主機的密鑰後，您可以將其加入您的本地端主機密鑰列表中，以免下次連線時再次驗證。輸入以下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span><br></pre></td></tr></table></figure>
+
+<p>這個命令會將 GitHub 的主機密鑰添加到 ~&#x2F;.ssh&#x2F;known_hosts 文件中。如果本地端已經有這個文件，那麼您可以將命令中的 &gt;&gt; 改為 &gt; 來覆蓋該文件。<br>結果就神奇的解決了！希望對搜尋到這篇文章的你也有幫助。</p>
 
     </div>
 
@@ -283,22 +294,21 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
-              <a href="/tags/Git-Bash/" rel="tag"><i class="fa fa-tag"></i> Git Bash</a>
+              <a href="/tags/MacOS/" rel="tag"><i class="fa fa-tag"></i> MacOS</a>
+              <a href="/tags/%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A%E8%88%87%E6%8C%87%E4%BB%A4/" rel="tag"><i class="fa fa-tag"></i> 環境設定與指令</a>
+              <a href="/tags/M1M2/" rel="tag"><i class="fa fa-tag"></i> M1M2</a>
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/git/20211215/3400115781/" rel="prev" title="How to add your Github SSH key（for win）">
-                  <i class="fa fa-chevron-left"></i> How to add your Github SSH key（for win）
+                <a href="/notion/20230101/1407709478/" rel="prev" title="How to Move Pages other Workspaces in Notion">
+                  <i class="fa fa-chevron-left"></i> How to Move Pages other Workspaces in Notion
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/learnexp/20220310/3515428140/" rel="next" title="栽入程式大宇宙">
-                  栽入程式大宇宙 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
