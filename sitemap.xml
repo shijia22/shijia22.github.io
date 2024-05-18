@@ -227,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://shijia22.github.io/mysql/20211018/2172800422/</loc>
+    <loc>https://shijia22.github.io/git/20210627/4152180459/</loc>
     
     <lastmod>2022-09-08</lastmod>
     
@@ -236,7 +236,7 @@
   </url>
   
   <url>
-    <loc>https://shijia22.github.io/git/20210627/4152180459/</loc>
+    <loc>https://shijia22.github.io/mysql/20211018/2172800422/</loc>
     
     <lastmod>2022-09-08</lastmod>
     
@@ -445,21 +445,7 @@
   </url>
   
   <url>
-    <loc>https://shijia22.github.io/tags/M1M2/</loc>
-    <lastmod>2024-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://shijia22.github.io/tags/MacOS/</loc>
-    <lastmod>2024-05-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://shijia22.github.io/tags/%E6%95%99%E5%AD%B8/</loc>
     <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -473,7 +459,21 @@
   </url>
   
   <url>
+    <loc>https://shijia22.github.io/tags/M1M2/</loc>
+    <lastmod>2024-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://shijia22.github.io/tags/homebrew/</loc>
+    <lastmod>2024-05-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://shijia22.github.io/tags/%E6%95%99%E5%AD%B8/</loc>
     <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -501,14 +501,14 @@
   </url>
   
   <url>
-    <loc>https://shijia22.github.io/tags/MySQL/</loc>
+    <loc>https://shijia22.github.io/tags/Git/</loc>
     <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://shijia22.github.io/tags/Git/</loc>
+    <loc>https://shijia22.github.io/tags/MySQL/</loc>
     <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -671,14 +671,14 @@
   </url>
   
   <url>
-    <loc>https://shijia22.github.io/categories/teaching/</loc>
+    <loc>https://shijia22.github.io/categories/terminal/</loc>
     <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://shijia22.github.io/categories/terminal/</loc>
+    <loc>https://shijia22.github.io/categories/teaching/</loc>
     <lastmod>2024-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
