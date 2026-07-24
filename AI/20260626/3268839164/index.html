@@ -285,7 +285,7 @@
 
 <!-- toc -->
 
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我幫朋友的旅遊業做了一套 CRM 側專案（Vue + Supabase + n8n + LINE bot）。開發大量倚賴 AI 代理，事前規劃（Plan Mode、多模型對抗審查）與機器驗收（vitest、grep sweep）都算完整，但當我想更進一步——讓代理「自動迴圈」連續迭代不用每輪等我確認——我先請代理對整個工作流做了一次自我稽核。結論很清楚：<strong>缺口不在迴圈的開頭，而在中段與收尾</strong>。這篇整理稽核後定下的護欄。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我替朋友的旅遊業打造了一套內部系統（Vue + Supabase + n8n + LINE bot）。開發大量倚賴 AI 代理，事前規劃（Plan Mode、多模型對抗審查）與機器驗收（vitest、grep sweep）都算完整，但當我想更進一步——讓代理「自動迴圈」連續迭代不用每輪等我確認——我先請代理對整個工作流做了一次自我稽核。結論很清楚：<strong>缺口不在迴圈的開頭，而在中段與收尾</strong>。這篇整理稽核後定下的護欄。</p>
 <h2 id="自動迴圈資格：三條件同時成立"><a href="#自動迴圈資格：三條件同時成立" class="headerlink" title="自動迴圈資格：三條件同時成立"></a>自動迴圈資格：三條件同時成立</h2><p>不是所有任務都能無人迴圈。判準是三條同時成立，缺一就得每輪停下來等人：</p>
 <ol>
 <li><strong>機器可驗收</strong>：有明確 pass&#x2F;fail 指令（<code>npm run test</code>、build、grep sweep 清零）。「看起來對了」不算驗收。</li>

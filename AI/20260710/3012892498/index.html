@@ -287,34 +287,28 @@
 
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>朋友在旅行社當業務，日常充滿重複性工作：出團前要一封一封組 LINE 行前通知、客人進線要回覆、報名後要追訂金與合約。我陸續幫忙做了幾個工具：LINE 行前通知產生器、客戶 CRM、客服 LINE bot、還有一堆跑在 n8n 上的自動化流程。</p>
 <p>這類需求丟給 2026 年的工程師，直覺反應大概是「全部接 LLM 就好了啊」。但實際落地後我的結論相反：<strong>LLM 只放在「可失敗、可降級」的位置，確定性的規則與流程才是主幹</strong>。整理出四個實際用到的模式。</p>
-<h2 id="模式一：結構化資料優先，LLM-只補缺"><a href="#模式一：結構化資料優先，LLM-只補缺" class="headerlink" title="模式一：結構化資料優先，LLM 只補缺"></a>模式一：結構化資料優先，LLM 只補缺</h2><p>行前通知產生器的邏輯是：輸入團號 → 呼叫供應商的說明會 API 拿結構化資料（集合時間、航班、領隊、氣候、時差…）→ 按模板組出 LINE 訊息。</p>
+<h2 id="模式一：結構化資料優先，LLM-只補缺"><a href="#模式一：結構化資料優先，LLM-只補缺" class="headerlink" title="模式一：結構化資料優先，LLM 只補缺"></a>模式一：結構化資料優先，LLM 只補缺</h2><p>行前通知產生器的邏輯是：輸入一個行程代碼 → 向上游系統取回結構化資料（集合時間、航班、領隊、氣候、時差…）→ 按模板組出 LINE 訊息。</p>
 <p>LLM（Gemini）只有一個角色：<strong>當來源資料缺了時差或氣候欄位時，才被呼叫來補這兩格</strong>。而且補位是有保險絲的：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getTimezoneGemini</span>(<span class="params">dest, apiKey</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!apiKey) <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>;           <span class="comment">// 沒金鑰 → 直接回空字串，不打 API</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      <span class="attr">signal</span>: <span class="title class_">AbortSignal</span>.<span class="title function_">timeout</span>(<span class="number">3000</span>),  <span class="comment">// 3 秒 timeout</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> data.<span class="property">candidates</span>?.[<span class="number">0</span>]?.<span class="property">content</span>?.<span class="property">parts</span>?.[<span class="number">0</span>]?.<span class="property">text</span>?.<span class="title function_">trim</span>() || <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>;                      <span class="comment">// 失敗 → 空字串，主流程照走</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>多數團的資料是齊的，所以 Gemini 多數時候根本不會被呼叫；就算被呼叫且失敗，也只是訊息少一格，業務自己補一句就好。另外「使用者調整欄位後重新組裝文案」的端點是純函式組裝，<strong>絕不碰外部 API 也絕不碰 LLM</strong>——已經確認過的資料，沒有理由再讓模型有機會改寫它。</p>
-<h2 id="模式二：Regex-先行，LLM-補位"><a href="#模式二：Regex-先行，LLM-補位" class="headerlink" title="模式二：Regex 先行，LLM 補位"></a>模式二：Regex 先行，LLM 補位</h2><p>業務自己也有一個 LINE 官方帳號當作快速建單入口：丟一段「客人姓名／電話／想去哪／幾人」的自由文字，系統就建好 CRM 客戶與詢問單。</p>
-<p>解析順序是：<strong>先用 regex 做結構化解析，解不出來的欄位才 fallback 給 Gemini，還缺就多輪追問使用者</strong>。電話號碼、人數這種有明確格式的東西，regex 一毛錢不花、零延遲、永不幻覺；LLM 只處理「規則寫不完」的長尾。</p>
-<p>一個小細節：業務端用的是<strong>獨立的 Gemini API Key</strong>，跟客戶端 bot 分開，避免互搶額度——把 LLM 當成一種會塞車的外部資源來管理，而不是無限供應的魔法。</p>
-<h2 id="模式三：意圖分類交給輕量模型，流程控制留給狀態機"><a href="#模式三：意圖分類交給輕量模型，流程控制留給狀態機" class="headerlink" title="模式三：意圖分類交給輕量模型，流程控制留給狀態機"></a>模式三：意圖分類交給輕量模型，流程控制留給狀態機</h2><p>客服 LINE bot 是最容易寫成「全部丟給 LLM 自由發揮」的地方，但這裡的架構是：</p>
-<ol>
-<li><strong>Debounce</strong>：客人連發多則訊息時先等一個時間窗，合併處理，避免重複觸發</li>
-<li><strong>關鍵字比對</strong>先攔截常見問題</li>
-<li>攔不到的才進 <strong>Gemini（輕量的 Flash Lite 級模型）做意圖分類</strong>——只輸出「旅遊／護照／台胞證／FAQ／推薦／其他」這幾類</li>
-<li>分類完之後，報名流程走的是<strong>確定性的狀態機</strong>：現在在哪一步、該問什麼、collected 了哪些欄位，全是程式碼控制</li>
-</ol>
-<p>LLM 在這裡的產出是一個「枚舉值」，不是自由文字。它答錯頂多是分錯類，不會憑空承諾客人一個不存在的行程或價格。</p>
-<h2 id="模式四：真人審核後才推播"><a href="#模式四：真人審核後才推播" class="headerlink" title="模式四：真人審核後才推播"></a>模式四：真人審核後才推播</h2><p>這是全系統最硬的一條紅線：<strong>排程與監控類的自動流程，一律不得直接對客人 LINE 推播</strong>。訂金提醒、尾款提醒、合約通知這些流程偵測到條件成立時，做的事情是——先發一張 Google Chat 卡片給業務，附上 CRM 客戶頁連結和「預計要發的 LINE 文案」，業務看過按下送出，訊息才會真的出去。</p>
+<h2 id="模式二：Regex-先行，LLM-補位"><a href="#模式二：Regex-先行，LLM-補位" class="headerlink" title="模式二：Regex 先行，LLM 補位"></a>模式二：Regex 先行，LLM 補位</h2><p>另一個場景是把自由文字轉成結構化單據：業務丟一段隨手打的客戶需求，系統要能建出對應的資料。</p>
+<p>原則是<strong>有明確格式的欄位一律先用 regex 解，解不出來的長尾才交給模型，還缺就回頭問使用者</strong>。電話號碼、人數這種東西，regex 一毛錢不花、零延遲、永不幻覺；LLM 只處理「規則寫不完」的部分。</p>
+<p>一個小細節：不同入口用各自獨立的 API Key，避免互搶額度——把 LLM 當成一種會塞車的外部資源來管理，而不是無限供應的魔法。</p>
+<h2 id="模式三：意圖分類交給輕量模型，流程控制留給狀態機"><a href="#模式三：意圖分類交給輕量模型，流程控制留給狀態機" class="headerlink" title="模式三：意圖分類交給輕量模型，流程控制留給狀態機"></a>模式三：意圖分類交給輕量模型，流程控制留給狀態機</h2><p>客服 LINE bot 是最容易寫成「全部丟給 LLM 自由發揮」的地方。我的做法剛好相反：模型在這裡只負責把客人的訊息歸到幾個預先定義好的意圖類別，產出是一個枚舉值，不是自由文字。真正決定「現在走到哪一步、該問什麼、還缺哪些欄位」的，是一台確定性的狀態機，全部由程式碼控制。</p>
+<p>這樣切的好處是失敗面積很小：模型答錯頂多是分錯類、走錯一條分支，而不會憑空承諾客人一個不存在的行程或價格。</p>
+<h2 id="模式四：真人審核後才推播"><a href="#模式四：真人審核後才推播" class="headerlink" title="模式四：真人審核後才推播"></a>模式四：真人審核後才推播</h2><p>這是全系統最硬的一條紅線：<strong>排程與監控類的自動流程，一律不得直接對客人 LINE 推播</strong>。各種到期與狀態提醒偵測到條件成立時，做的事情是——先發一張卡片到業務的內部通訊軟體，附上客戶頁連結和「預計要發的 LINE 文案」，業務看過按下送出，訊息才會真的出去。</p>
 <p>CRM 的手動推播也有 preview dry-run 模式：先組好文案回傳給前端讓業務確認，這一步不 push、不寫資料庫。</p>
 <p>自動化省掉的是「組文案、盯條件」的時間，<strong>「要不要發、發什麼」的決定權永遠留在人身上</strong>。對面是付了幾萬塊團費的真實客人，這條線不能省。</p>
 <h2 id="冪等與防重複：自動化的隱形地基"><a href="#冪等與防重複：自動化的隱形地基" class="headerlink" title="冪等與防重複：自動化的隱形地基"></a>冪等與防重複：自動化的隱形地基</h2><p>跟 LLM 無關但同樣重要的一課：只要流程會被自動觸發，就要假設它<strong>一定會被重複觸發</strong>。系統裡實際用到的手段：</p>
 <ul>
-<li><strong>去重視窗</strong>：建立訂金單前，先查 10 分鐘內是否已有同客戶、同金額、同付款方式的單，命中就直接短路回傳既有單——因為 serverless 有 10 秒 timeout，回應丟失後業務重按一次是常態</li>
-<li><strong>一次性旗標</strong>：「已通知開票」「已偵測合約簽回」這類事件，用一個 timestamp 欄位做 gate，寫過就不再觸發</li>
-<li><strong>冷卻時間</strong>：催款通知有 24 小時冷卻；事件驅動的 webhook 入口另有 1 小時節流閘，cron 排程退居兜底</li>
+<li><strong>去重視窗</strong>：建立單據前，先查一段時間內有沒有內容相同的單，命中就短路回傳既有的那筆——serverless 有 timeout，回應丟失後使用者重按一次是常態</li>
+<li><strong>一次性旗標</strong>：「已通知」這類事件用一個 timestamp 欄位當 gate，寫過就不再觸發</li>
+<li><strong>冷卻時間</strong>：提醒類通知設冷卻期；事件驅動的 webhook 入口另設節流閘，cron 排程退居兜底</li>
 </ul>
-<p>沒有這層地基,上面接再聰明的模型都只是讓錯誤發生得更快。</p>
+<p>沒有這層地基，上面接再聰明的模型都只是讓錯誤發生得更快。</p>
 <h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>回頭看整套系統，LLM 出現的三個位置——補缺欄位、解析長尾文字、意圖分類——共同點是：<strong>輸出可以驗證或可以捨棄，失敗時有明確的降級路徑</strong>。而金流、推播、狀態流轉這些「錯了會痛」的地方，全部是確定性程式加上真人把關。</p>
-<p>把 LLM 當備援不當核心,聽起來很不炫,但這套東西讓一個非工程背景的業務每天安心用到現在。期待自己下個優化工作流程的筆記！</p>
+<p>把 LLM 當備援不當核心，聽起來很不炫，但這套東西讓一個非工程背景的業務每天安心用到現在。你的專案把 LLM 放在哪一層？歡迎留言交流。</p>
 <p>參考資料：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/messaging-api/">LINE Messaging API 官方文件</a></li>
