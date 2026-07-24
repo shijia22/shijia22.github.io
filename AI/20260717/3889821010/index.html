@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-dark","dark":"atom-one-dark","enable":true},"prism":{"light":"prism","dark":"prism-one-dark","enable":false},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="幫一位旅行社業務朋友導入 AI 之後，我學到最重要的一課：工具做得再好，只要使用者需要「自己想提示詞」，就注定用不起來。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把 AI 交到非工程師手上：防幻覺模板與三秒答案">
+<meta property="og:url" content="https://shijia22.github.io/AI/20260717/3889821010/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="幫一位旅行社業務朋友導入 AI 之後，我學到最重要的一課：工具做得再好，只要使用者需要「自己想提示詞」，就注定用不起來。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2026-07-17T13:20:00.000Z">
+<meta property="article:modified_time" content="2026-07-17T13:20:00.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="AI 應用">
+<meta property="article:tag" content="提示詞">
+<meta property="article:tag" content="資料分析">
+<meta property="article:tag" content="防幻覺">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/AI/20260717/3889821010/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/AI/20260717/3889821010/","path":"AI/20260717/3889821010/","title":"把 AI 交到非工程師手上：防幻覺模板與三秒答案"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>把 AI 交到非工程師手上：防幻覺模板與三秒答案 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜尋..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95%E4%B8%80%EF%BC%9A%E5%9B%BA%E5%AE%9A%E6%8F%90%E7%A4%BA%E8%A9%9E%E6%A8%A1%E6%9D%BF%EF%BC%8C%E9%98%B2%E5%B9%BB%E8%A6%BA%E8%A6%8F%E5%89%87%E5%AF%AB%E5%9C%A8%E8%A3%A1%E9%9D%A2"><span class="nav-number">2.</span> <span class="nav-text">做法一：固定提示詞模板，防幻覺規則寫在裡面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95%E4%BA%8C%EF%BC%9A%E8%B3%87%E6%96%99%E5%85%88%E7%AE%97%E5%A5%BD%EF%BC%8C%E6%9F%A5%E8%A9%A2%E5%8F%AA%E7%B5%A6%E7%AD%94%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">做法二：資料先算好，查詢只給答案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A5%E5%BF%98%E4%BA%86%E5%80%8B%E8%B3%87%E7%B4%80%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">別忘了個資紀律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">5.</span> <span class="nav-text">小結</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/AI/20260717/3889821010/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="把 AI 交到非工程師手上：防幻覺模板與三秒答案 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          把 AI 交到非工程師手上：防幻覺模板與三秒答案
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2026-07-17 21:20:00" itemprop="dateCreated datePublished" datetime="2026-07-17T21:20:00+08:00">2026-07-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>幫一位旅行社業務朋友導入 AI 之後，我學到最重要的一課：工具做得再好，只要使用者需要「自己想提示詞」，就注定用不起來。</p>
+<span id="more"></span>
+
+<!-- toc -->
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>朋友是旅行社業務，不寫程式。日常有兩個很花時間的痛點：</p>
+<ol>
+<li>客人要看「行程亮點簡報」，每次都要從行程檔手工整理成投影片，一做就是一兩個小時。</li>
+<li>客人隨口問一個團好不好，要判斷這條產品線值不值得推，得回頭翻報表、翻問卷。</li>
+</ol>
+<p>這兩個問題我都用了 AI 或資料工具來解，但解法的形狀完全不同，也各自踩出一些心得。</p>
+<h2 id="做法一：固定提示詞模板，防幻覺規則寫在裡面"><a href="#做法一：固定提示詞模板，防幻覺規則寫在裡面" class="headerlink" title="做法一：固定提示詞模板，防幻覺規則寫在裡面"></a>做法一：固定提示詞模板，防幻覺規則寫在裡面</h2><p>簡報這題，我沒有寫任何程式，交付物就是<strong>一份文件</strong>：打開 Gemini Canvas、上傳行程檔（Word 或 PDF）、把整段固定提示詞貼上，只需填最上面三格（客戶名稱、聯絡方式、報價），送出就有一份可編輯的簡報。</p>
+<p>這段提示詞裡最重要的一句，是寫死在模板中的「鐵則」：</p>
+<blockquote>
+<p>航班、飯店、景點、價格只能來自我上傳的檔案，不准自己編；檔案裡沒有的就不要寫。</p>
+</blockquote>
+<p>原因很現實：<strong>不能指望非工程師的使用者記得提醒 AI 不要幻覺</strong>。對方不知道什麼是 hallucination，也不該需要知道。防幻覺是設計者的責任，規則必須內建在模板裡，每次貼上就自動生效。</p>
+<p>同樣的思路還有兩層保險：</p>
+<ul>
+<li>提示詞最後要求 AI 另外列一張「我要再確認的清單」（航班時刻、飯店、報價、聯絡方式），把最容易錯的欄位主動攤出來。</li>
+<li>文件裡附一份送出後的人工檢查清單，只有三格：封面有客戶名字嗎？航班／飯店／價格跟原檔一樣嗎？報價和聯絡方式對嗎？AI 最容易抄錯的就是這些。</li>
+</ul>
+<p>AI 產出 + 內建防幻覺規則 + 最小人工核對，三件事都塞進同一份「每次都打開它」的文件，這才是非工程師能持續使用的形狀。</p>
+<h2 id="做法二：資料先算好，查詢只給答案"><a href="#做法二：資料先算好，查詢只給答案" class="headerlink" title="做法二：資料先算好，查詢只給答案"></a>做法二：資料先算好，查詢只給答案</h2><p>第二個痛點是判斷產品線好壞。旅行社在售產品近百個，靠記憶不可能執行任何選品策略。</p>
+<p>這題的解法反而幾乎沒有用到生成式 AI：</p>
+<ol>
+<li>先離線跑腳本，用公開行程清單推估「團號前綴 → 目的地／產品線」的對照表（純統計推估，還附信心等級，樣本不足或跨國家的前綴會標成 ambiguous）。</li>
+<li>把毛利指標與問卷滿意度交叉，算出每條產品線的紅綠燈：紅燈不主動推、綠燈（高毛利指標 × 高滿意度）進主推清單。</li>
+<li>落地形式就是一張 Google Sheet，加上通訊軟體機器人的一個查詢指令：業務輸入團號，回傳「燈號＋滿意度＋亮點」三行字。客人問到任何團，三秒內查完就能回覆。</li>
+</ol>
+<p>我的心得是：<strong>對非技術者，資料工具的正確形狀是「答案」，不是「儀表板」</strong>。做一個漂亮的 BI 儀表板，業務不會開；但「輸入代碼、拿到三行結論」可以嵌進跟客人對話的當下。所有的分類、計算、判斷規則都預先在工程端算好，查詢端只留最後一步。</p>
+<h2 id="別忘了個資紀律"><a href="#別忘了個資紀律" class="headerlink" title="別忘了個資紀律"></a>別忘了個資紀律</h2><p>這類工作一定會碰到旅客姓名等個資。我的慣例是：分析腳本與說明文件進版控，但所有原始資料（<code>data/</code>）與輸出報告（<code>out/</code>）一律 git-ignore，理由寫明白——常含旅客姓名等 PII，且可重新產生。工具可以分享，資料永遠不跟著走。</p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>回頭看，這兩個做法的共同點是：AI 和資料的複雜度全部留在工程端，交到使用者手上的只有「貼上就能用的模板」和「三秒查到的答案」。下次再幫非工程師做工具，我還是會先問自己：這個東西對方願意每天打開嗎？</p>
+<p>期待自己下一篇 AI 應用筆記！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI-%E6%87%89%E7%94%A8/" rel="tag"><i class="fa fa-tag"></i> AI 應用</a>
+              <a href="/tags/%E6%8F%90%E7%A4%BA%E8%A9%9E/" rel="tag"><i class="fa fa-tag"></i> 提示詞</a>
+              <a href="/tags/%E9%98%B2%E5%B9%BB%E8%A6%BA/" rel="tag"><i class="fa fa-tag"></i> 防幻覺</a>
+              <a href="/tags/%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90/" rel="tag"><i class="fa fa-tag"></i> 資料分析</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/AI/20260710/3012892498/" rel="prev" title="把 LLM 當備援不當核心：旅行社自動化的克制用法">
+                  <i class="fa fa-angle-left"></i> 把 LLM 當備援不當核心：旅行社自動化的克制用法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/AI/20260724/3876681777/" rel="next" title="別只信一個 AI：多模型交叉驗證的三種實作">
+                  別只信一個 AI：多模型交叉驗證的三種實作 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="在 GitHub 上關注我" aria-label="在 GitHub 上關注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-dark","dark":"atom-one-dark","enable":true},"prism":{"light":"prism","dark":"prism-one-dark","enable":false},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="同一個問題丟給兩個 AI，答案不一樣的地方，往往就是幻覺藏身的地方。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="別只信一個 AI：多模型交叉驗證的三種實作">
+<meta property="og:url" content="https://shijia22.github.io/AI/20260724/3876681777/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="同一個問題丟給兩個 AI，答案不一樣的地方，往往就是幻覺藏身的地方。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2026-07-24T01:30:00.000Z">
+<meta property="article:modified_time" content="2026-07-24T01:30:00.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="AI 評測">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="多模型">
+<meta property="article:tag" content="工作流">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/AI/20260724/3876681777/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/AI/20260724/3876681777/","path":"AI/20260724/3876681777/","title":"別只信一個 AI：多模型交叉驗證的三種實作"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>別只信一個 AI：多模型交叉驗證的三種實作 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜尋..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95%E4%B8%80%EF%BC%9A%E7%A0%94%E7%A9%B6%E6%AF%94%E5%B0%8D-%E2%80%94%E2%80%94-%E5%88%86%E6%AD%A7%E9%BB%9E%E5%B0%B1%E6%98%AF%E5%B9%BB%E8%A6%BA%E5%81%B5%E6%B8%AC%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">做法一：研究比對 —— 分歧點就是幻覺偵測器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95%E4%BA%8C%EF%BC%9A%E7%9B%B2%E6%B8%AC%E8%A9%95%E5%88%86-%E2%80%94%E2%80%94-%E5%B9%AB%E4%BB%BB%E5%8B%99%E6%8C%91%E5%B0%8D%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">做法二：盲測評分 —— 幫任務挑對模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9A%E6%B3%95%E4%B8%89%EF%BC%9A%E5%B0%8D%E6%8A%97%E5%BC%8F%E8%A6%8F%E5%8A%83-%E2%80%94%E2%80%94-%E6%8A%8A%E4%BA%A4%E5%8F%89%E9%A9%97%E8%AD%89%E5%81%9A%E6%88%90%E5%9B%BA%E5%AE%9A%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">做法三：對抗式規劃 —— 把交叉驗證做成固定流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E5%90%8C%E5%BF%83%E6%B3%95%EF%BC%9A%E5%83%B9%E5%80%BC%E5%9C%A8%E5%88%86%E6%AD%A7%E9%BB%9E%E6%B8%85%E5%96%AE%EF%BC%8C%E4%B8%8D%E5%9C%A8%E5%A4%9A%E6%95%B8%E6%B1%BA"><span class="nav-number">5.</span> <span class="nav-text">共同心法：價值在分歧點清單，不在多數決</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/AI/20260724/3876681777/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="別只信一個 AI：多模型交叉驗證的三種實作 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          別只信一個 AI：多模型交叉驗證的三種實作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2026-07-24 09:30:00" itemprop="dateCreated datePublished" datetime="2026-07-24T09:30:00+08:00">2026-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>同一個問題丟給兩個 AI，答案不一樣的地方，往往就是幻覺藏身的地方。</p>
+<span id="more"></span>
+
+<!-- toc -->
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>用 AI 工作一段時間後，我學到最重要的一課不是「怎麼下 prompt」，而是「不要只信一個模型的答案」。這篇整理我在真實專案裡實際跑過的三種多模型交叉驗證做法：研究比對、盲測評分、對抗式規劃。它們的成本不同、適用場景不同，但共同的價值只有一個 —— 幫你找出「該親自查證什麼」。</p>
+<h2 id="做法一：研究比對-——-分歧點就是幻覺偵測器"><a href="#做法一：研究比對-——-分歧點就是幻覺偵測器" class="headerlink" title="做法一：研究比對 —— 分歧點就是幻覺偵測器"></a>做法一：研究比對 —— 分歧點就是幻覺偵測器</h2><p>情境：幫一家金融業客戶評估「零預算」網站架構，需要調研一堆免費工具與免費額度（UI 元件庫、AI 建站工具、Netlify、Supabase 等）的授權與限制。</p>
+<p>做法很簡單：先讓 Claude 做一輪完整調研，再讓 Codex 針對同一批結論逐項複核官方來源，最後把兩邊意見整理成一張「共識 &#x2F; 分歧與裁決」表。</p>
+<p>結果分歧點非常有料，幾個例子：</p>
+<ul>
+<li>某元件平台：Claude 認為定價沒有免費方案所以不可用；Codex 查官方 pricing 發現其實有 $0 的 Hobby 方案。→ 過時資訊。</li>
+<li>Supabase 免費專案數：初版寫「每個 organization 2 個，可以另開 organization 加量」；官方文件明確寫免費額度是跨所有 organization 計算的。→ 聽起來合理的幻覺，而且照做會踩到服務條款。</li>
+<li>用 cron 打 API 避免免費資料庫休眠：官方只說「通常」足夠、不保證。→ 不是錯，但不能當 SLA 承諾寫進提案。</li>
+</ul>
+<p>注意這裡的重點：<strong>兩個 AI 都同意的地方也不代表是對的，但分歧的地方幾乎一定值得回查官方來源。</strong> 分歧清單把「全部重查一遍」的成本，壓縮成「只重查有疑慮的十件事」。</p>
+<h2 id="做法二：盲測評分-——-幫任務挑對模型"><a href="#做法二：盲測評分-——-幫任務挑對模型" class="headerlink" title="做法二：盲測評分 —— 幫任務挑對模型"></a>做法二：盲測評分 —— 幫任務挑對模型</h2><p>情境：想知道同一家的三個模型版本（Opus 4.6 &#x2F; 4.7 &#x2F; 4.8），哪個最適合做深度分析類工作。</p>
+<p>做法：拿一份真實專案的除錯根因分析（RCA）文件，設計四個子任務（因果鏈梳理、修法完整性分析、補測試情境、文件品質評分），三個模型收到完全相同的 prompt，然後把三份輸出打亂順序、匿名成 Model A&#x2F;B&#x2F;C，交給另一家的模型（Codex）做五個維度的盲評。</p>
+<p>結果出乎我意料：勝出的不是最新版本。中間版本抓到一個另外兩個模型都沒發現的邊界情況（迴圈解碼中途失敗會留下半解碼的中間態），而且評分校準最誠實、資訊密度最高。最新版本最系統化、掃得最全，但深度和批判力稍弱。</p>
+<p>結論不是「哪個模型最強」，而是<strong>不同深度的任務適合不同模型</strong>：深度審查用抓得到獨家問題的那個，首輪大範圍掃描用系統化的那個。這種結論只有盲測能給你 —— 不盲測的話，你的印象分數會被「版本號比較新」綁架。</p>
+<h2 id="做法三：對抗式規劃-——-把交叉驗證做成固定流程"><a href="#做法三：對抗式規劃-——-把交叉驗證做成固定流程" class="headerlink" title="做法三：對抗式規劃 —— 把交叉驗證做成固定流程"></a>做法三：對抗式規劃 —— 把交叉驗證做成固定流程</h2><p>前兩種是一次性的，第三種是把多模型驗證直接寫進開發流程的規則裡。我在一個 side project 的 CLAUDE.md 裡定了這條：改動檔案超過 2 個的功能規劃，自動跑一個 multi-model workflow —— A 模型出架構方案、B 模型審查現狀相容性、再由 A 模型做對抗性審查（專門挑毛病），全部通過才進人工 LGTM 關卡；workflow 掛掉就退回單模型規劃。</p>
+<p>另外搭配一條「獨立驗證」規則：行為或流程變更在宣告完成前，回歸驗證和 review 必須交給一個乾淨上下文的獨立 subagent，不准寫 code 的那個 session 自己審自己。原因很直白：同一個上下文裡的模型會傾向替自己的產出護航，換一個沒有包袱的上下文，挑錯的意願和能力都明顯更好。</p>
+<h2 id="共同心法：價值在分歧點清單，不在多數決"><a href="#共同心法：價值在分歧點清單，不在多數決" class="headerlink" title="共同心法：價值在分歧點清單，不在多數決"></a>共同心法：價值在分歧點清單，不在多數決</h2><p>三種做法背後是同一件事：<strong>多模型交叉驗證的價值不是投票表決誰對，而是產出一張「分歧點清單」。</strong> 兩個模型都說對的事你未必要信，但它們吵架的地方，就是你該親自打開官方文件、親自跑指令驗證的地方。AI 幫你把無限的查證範圍收斂成有限的待辦清單 —— 這才是它省時間的方式。</p>
+<p>如果你只想先試一種：從做法一開始。成本最低，一次調研加一次複核，你就會親眼看到「講得頭頭是道的幻覺」長什麼樣子，之後就再也不敢只信一個 AI 了 XD</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LLM/" rel="tag"><i class="fa fa-tag"></i> LLM</a>
+              <a href="/tags/%E5%A4%9A%E6%A8%A1%E5%9E%8B/" rel="tag"><i class="fa fa-tag"></i> 多模型</a>
+              <a href="/tags/AI-%E8%A9%95%E6%B8%AC/" rel="tag"><i class="fa fa-tag"></i> AI 評測</a>
+              <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/" rel="tag"><i class="fa fa-tag"></i> 工作流</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/AI/20260717/3889821010/" rel="prev" title="把 AI 交到非工程師手上：防幻覺模板與三秒答案">
+                  <i class="fa fa-angle-left"></i> 把 AI 交到非工程師手上：防幻覺模板與三秒答案
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="在 GitHub 上關注我" aria-label="在 GitHub 上關注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js" defer></script>
+
+</body>
+</html>

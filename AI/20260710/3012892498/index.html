@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-dark","dark":"atom-one-dark","enable":true},"prism":{"light":"prism","dark":"prism-one-dark","enable":false},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="這一年幫朋友的旅行社業務做了一系列自動化工具，最後發現整套系統裡最重要的設計決策，是「哪裡不要用 LLM」。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把 LLM 當備援不當核心：旅行社自動化的克制用法">
+<meta property="og:url" content="https://shijia22.github.io/AI/20260710/3012892498/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="這一年幫朋友的旅行社業務做了一系列自動化工具，最後發現整套系統裡最重要的設計決策，是「哪裡不要用 LLM」。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2026-07-10T13:15:00.000Z">
+<meta property="article:modified_time" content="2026-07-10T13:15:00.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="LINE Bot">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="n8n">
+<meta property="article:tag" content="自動化">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/AI/20260710/3012892498/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/AI/20260710/3012892498/","path":"AI/20260710/3012892498/","title":"把 LLM 當備援不當核心：旅行社自動化的克制用法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>把 LLM 當備援不當核心：旅行社自動化的克制用法 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜尋..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E4%B8%80%EF%BC%9A%E7%B5%90%E6%A7%8B%E5%8C%96%E8%B3%87%E6%96%99%E5%84%AA%E5%85%88%EF%BC%8CLLM-%E5%8F%AA%E8%A3%9C%E7%BC%BA"><span class="nav-number">2.</span> <span class="nav-text">模式一：結構化資料優先，LLM 只補缺</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E4%BA%8C%EF%BC%9ARegex-%E5%85%88%E8%A1%8C%EF%BC%8CLLM-%E8%A3%9C%E4%BD%8D"><span class="nav-number">3.</span> <span class="nav-text">模式二：Regex 先行，LLM 補位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E4%B8%89%EF%BC%9A%E6%84%8F%E5%9C%96%E5%88%86%E9%A1%9E%E4%BA%A4%E7%B5%A6%E8%BC%95%E9%87%8F%E6%A8%A1%E5%9E%8B%EF%BC%8C%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E7%95%99%E7%B5%A6%E7%8B%80%E6%85%8B%E6%A9%9F"><span class="nav-number">4.</span> <span class="nav-text">模式三：意圖分類交給輕量模型，流程控制留給狀態機</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%9B%9B%EF%BC%9A%E7%9C%9F%E4%BA%BA%E5%AF%A9%E6%A0%B8%E5%BE%8C%E6%89%8D%E6%8E%A8%E6%92%AD"><span class="nav-number">5.</span> <span class="nav-text">模式四：真人審核後才推播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%AA%E7%AD%89%E8%88%87%E9%98%B2%E9%87%8D%E8%A4%87%EF%BC%9A%E8%87%AA%E5%8B%95%E5%8C%96%E7%9A%84%E9%9A%B1%E5%BD%A2%E5%9C%B0%E5%9F%BA"><span class="nav-number">6.</span> <span class="nav-text">冪等與防重複：自動化的隱形地基</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">7.</span> <span class="nav-text">結語</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/AI/20260710/3012892498/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="把 LLM 當備援不當核心：旅行社自動化的克制用法 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          把 LLM 當備援不當核心：旅行社自動化的克制用法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2026-07-10 21:15:00" itemprop="dateCreated datePublished" datetime="2026-07-10T21:15:00+08:00">2026-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>這一年幫朋友的旅行社業務做了一系列自動化工具，最後發現整套系統裡最重要的設計決策，是「哪裡<strong>不要</strong>用 LLM」。</p>
+<span id="more"></span>
+
+<!-- toc -->
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>朋友在旅行社當業務，日常充滿重複性工作：出團前要一封一封組 LINE 行前通知、客人進線要回覆、報名後要追訂金與合約。我陸續幫忙做了幾個工具：LINE 行前通知產生器、客戶 CRM、客服 LINE bot、還有一堆跑在 n8n 上的自動化流程。</p>
+<p>這類需求丟給 2026 年的工程師，直覺反應大概是「全部接 LLM 就好了啊」。但實際落地後我的結論相反：<strong>LLM 只放在「可失敗、可降級」的位置，確定性的規則與流程才是主幹</strong>。整理出四個實際用到的模式。</p>
+<h2 id="模式一：結構化資料優先，LLM-只補缺"><a href="#模式一：結構化資料優先，LLM-只補缺" class="headerlink" title="模式一：結構化資料優先，LLM 只補缺"></a>模式一：結構化資料優先，LLM 只補缺</h2><p>行前通知產生器的邏輯是：輸入團號 → 呼叫供應商的說明會 API 拿結構化資料（集合時間、航班、領隊、氣候、時差…）→ 按模板組出 LINE 訊息。</p>
+<p>LLM（Gemini）只有一個角色：<strong>當來源資料缺了時差或氣候欄位時，才被呼叫來補這兩格</strong>。而且補位是有保險絲的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getTimezoneGemini</span>(<span class="params">dest, apiKey</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!apiKey) <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>;           <span class="comment">// 沒金鑰 → 直接回空字串，不打 API</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      <span class="attr">signal</span>: <span class="title class_">AbortSignal</span>.<span class="title function_">timeout</span>(<span class="number">3000</span>),  <span class="comment">// 3 秒 timeout</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> data.<span class="property">candidates</span>?.[<span class="number">0</span>]?.<span class="property">content</span>?.<span class="property">parts</span>?.[<span class="number">0</span>]?.<span class="property">text</span>?.<span class="title function_">trim</span>() || <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>;                      <span class="comment">// 失敗 → 空字串，主流程照走</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多數團的資料是齊的，所以 Gemini 多數時候根本不會被呼叫；就算被呼叫且失敗，也只是訊息少一格，業務自己補一句就好。另外「使用者調整欄位後重新組裝文案」的端點是純函式組裝，<strong>絕不碰外部 API 也絕不碰 LLM</strong>——已經確認過的資料，沒有理由再讓模型有機會改寫它。</p>
+<h2 id="模式二：Regex-先行，LLM-補位"><a href="#模式二：Regex-先行，LLM-補位" class="headerlink" title="模式二：Regex 先行，LLM 補位"></a>模式二：Regex 先行，LLM 補位</h2><p>業務自己也有一個 LINE 官方帳號當作快速建單入口：丟一段「客人姓名／電話／想去哪／幾人」的自由文字，系統就建好 CRM 客戶與詢問單。</p>
+<p>解析順序是：<strong>先用 regex 做結構化解析，解不出來的欄位才 fallback 給 Gemini，還缺就多輪追問使用者</strong>。電話號碼、人數這種有明確格式的東西，regex 一毛錢不花、零延遲、永不幻覺；LLM 只處理「規則寫不完」的長尾。</p>
+<p>一個小細節：業務端用的是<strong>獨立的 Gemini API Key</strong>，跟客戶端 bot 分開，避免互搶額度——把 LLM 當成一種會塞車的外部資源來管理，而不是無限供應的魔法。</p>
+<h2 id="模式三：意圖分類交給輕量模型，流程控制留給狀態機"><a href="#模式三：意圖分類交給輕量模型，流程控制留給狀態機" class="headerlink" title="模式三：意圖分類交給輕量模型，流程控制留給狀態機"></a>模式三：意圖分類交給輕量模型，流程控制留給狀態機</h2><p>客服 LINE bot 是最容易寫成「全部丟給 LLM 自由發揮」的地方，但這裡的架構是：</p>
+<ol>
+<li><strong>Debounce</strong>：客人連發多則訊息時先等一個時間窗，合併處理，避免重複觸發</li>
+<li><strong>關鍵字比對</strong>先攔截常見問題</li>
+<li>攔不到的才進 <strong>Gemini（輕量的 Flash Lite 級模型）做意圖分類</strong>——只輸出「旅遊／護照／台胞證／FAQ／推薦／其他」這幾類</li>
+<li>分類完之後，報名流程走的是<strong>確定性的狀態機</strong>：現在在哪一步、該問什麼、collected 了哪些欄位，全是程式碼控制</li>
+</ol>
+<p>LLM 在這裡的產出是一個「枚舉值」，不是自由文字。它答錯頂多是分錯類，不會憑空承諾客人一個不存在的行程或價格。</p>
+<h2 id="模式四：真人審核後才推播"><a href="#模式四：真人審核後才推播" class="headerlink" title="模式四：真人審核後才推播"></a>模式四：真人審核後才推播</h2><p>這是全系統最硬的一條紅線：<strong>排程與監控類的自動流程，一律不得直接對客人 LINE 推播</strong>。訂金提醒、尾款提醒、合約通知這些流程偵測到條件成立時，做的事情是——先發一張 Google Chat 卡片給業務，附上 CRM 客戶頁連結和「預計要發的 LINE 文案」，業務看過按下送出，訊息才會真的出去。</p>
+<p>CRM 的手動推播也有 preview dry-run 模式：先組好文案回傳給前端讓業務確認，這一步不 push、不寫資料庫。</p>
+<p>自動化省掉的是「組文案、盯條件」的時間，<strong>「要不要發、發什麼」的決定權永遠留在人身上</strong>。對面是付了幾萬塊團費的真實客人，這條線不能省。</p>
+<h2 id="冪等與防重複：自動化的隱形地基"><a href="#冪等與防重複：自動化的隱形地基" class="headerlink" title="冪等與防重複：自動化的隱形地基"></a>冪等與防重複：自動化的隱形地基</h2><p>跟 LLM 無關但同樣重要的一課：只要流程會被自動觸發，就要假設它<strong>一定會被重複觸發</strong>。系統裡實際用到的手段：</p>
+<ul>
+<li><strong>去重視窗</strong>：建立訂金單前，先查 10 分鐘內是否已有同客戶、同金額、同付款方式的單，命中就直接短路回傳既有單——因為 serverless 有 10 秒 timeout，回應丟失後業務重按一次是常態</li>
+<li><strong>一次性旗標</strong>：「已通知開票」「已偵測合約簽回」這類事件，用一個 timestamp 欄位做 gate，寫過就不再觸發</li>
+<li><strong>冷卻時間</strong>：催款通知有 24 小時冷卻；事件驅動的 webhook 入口另有 1 小時節流閘，cron 排程退居兜底</li>
+</ul>
+<p>沒有這層地基,上面接再聰明的模型都只是讓錯誤發生得更快。</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>回頭看整套系統，LLM 出現的三個位置——補缺欄位、解析長尾文字、意圖分類——共同點是：<strong>輸出可以驗證或可以捨棄，失敗時有明確的降級路徑</strong>。而金流、推播、狀態流轉這些「錯了會痛」的地方，全部是確定性程式加上真人把關。</p>
+<p>把 LLM 當備援不當核心,聽起來很不炫,但這套東西讓一個非工程背景的業務每天安心用到現在。期待自己下個優化工作流程的筆記！</p>
+<p>參考資料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.line.biz/en/docs/messaging-api/">LINE Messaging API 官方文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://ai.google.dev/gemini-api/docs">Gemini API 官方文件</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.n8n.io/">n8n 官方文件</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%87%AA%E5%8B%95%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 自動化</a>
+              <a href="/tags/LLM/" rel="tag"><i class="fa fa-tag"></i> LLM</a>
+              <a href="/tags/LINE-Bot/" rel="tag"><i class="fa fa-tag"></i> LINE Bot</a>
+              <a href="/tags/n8n/" rel="tag"><i class="fa fa-tag"></i> n8n</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/AI/20260703/816556734/" rel="prev" title="AI 協作下的文件去識別化：從內部版到對外版的方法論">
+                  <i class="fa fa-angle-left"></i> AI 協作下的文件去識別化：從內部版到對外版的方法論
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/AI/20260717/3889821010/" rel="next" title="把 AI 交到非工程師手上：防幻覺模板與三秒答案">
+                  把 AI 交到非工程師手上：防幻覺模板與三秒答案 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="在 GitHub 上關注我" aria-label="在 GitHub 上關注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js" defer></script>
+
+</body>
+</html>

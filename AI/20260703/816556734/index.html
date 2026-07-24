@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico">
+  <link rel="mask-icon" href="/images/logo.jpg" color="#222">
+  <meta name="google-site-verification" content="DhWkA_kyCylwhwxhRffqtTa0XQulOTuU6bPDDbHmjs0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"shijia22.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.28.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"atom-one-dark","dark":"atom-one-dark","enable":true},"prism":{"light":"prism","dark":"prism-one-dark","enable":false},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"},"algolia":{"appID":"14EXB2RRDT","apiKey":"cbfd612ed7219594b7365f558c903223","indexName":"my-hexo-blog","hits":{"per_page":10}}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="內部 PRD 寄給客戶前，你確定裡面沒有殘留報價、技術債註記、內部代號嗎？靠肉眼檢查，我可以告訴你：一定會漏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI 協作下的文件去識別化：從內部版到對外版的方法論">
+<meta property="og:url" content="https://shijia22.github.io/AI/20260703/816556734/index.html">
+<meta property="og:site_name" content="釋迦佛系修練手札">
+<meta property="og:description" content="內部 PRD 寄給客戶前，你確定裡面沒有殘留報價、技術債註記、內部代號嗎？靠肉眼檢查，我可以告訴你：一定會漏。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+<meta property="article:published_time" content="2026-07-03T13:10:00.000Z">
+<meta property="article:modified_time" content="2026-07-03T13:10:00.000Z">
+<meta property="article:author" content="釋迦 4+">
+<meta property="article:tag" content="AI 應用">
+<meta property="article:tag" content="PRD">
+<meta property="article:tag" content="去識別化">
+<meta property="article:tag" content="文件">
+<meta name="twitter:card" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+<meta name="twitter:image" content="https://shijia22.github.io/images/twitter-cover.jpg">
+
+
+<link rel="canonical" href="https://shijia22.github.io/AI/20260703/816556734/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://shijia22.github.io/AI/20260703/816556734/","path":"AI/20260703/816556734/","title":"AI 協作下的文件去識別化：從內部版到對外版的方法論"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>AI 協作下的文件去識別化：從內部版到對外版的方法論 | 釋迦佛系修練手札</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TM45KMW3J"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-1TM45KMW3J","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">釋迦佛系修練手札</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">持續修練中</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜尋..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%89%87%EF%BC%9A%E5%B0%8D%E5%A4%96%E7%89%88%E6%B0%B8%E9%81%A0%E9%87%8D%E6%96%B0%E6%8E%A8%E5%B0%8E"><span class="nav-number">2.</span> <span class="nav-text">核心原則：對外版永遠重新推導</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4-%E6%94%B9%E5%AF%AB-%E4%BF%9D%E7%95%99-%E4%B8%89%E5%88%86%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">移除 &#x2F; 改寫 &#x2F; 保留 三分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AE%98%E7%95%99%E6%8E%83%E6%8F%8F%EF%BC%9Agrep-%E6%98%AF%E6%9C%80%E5%BE%8C%E4%B8%80%E9%81%93%E9%97%9C%E5%8D%A1"><span class="nav-number">4.</span> <span class="nav-text">殘留掃描：grep 是最後一道關卡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B9%BB%E8%A6%BA%EF%BC%9AAI-%E4%B8%8D%E5%87%86%E8%85%A6%E8%A3%9C"><span class="nav-number">5.</span> <span class="nav-text">反幻覺：AI 不准腦補</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B5%90%E8%AA%9E"><span class="nav-number">6.</span> <span class="nav-text">結語</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="釋迦 4+"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">釋迦 4+</p>
+  <div class="site-description" itemprop="description">認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shijia22/shijia22.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shijia22&#x2F;shijia22.github.io" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:shichia0207@gmail.com" title="E-Mail → mailto:shichia0207@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/shichialifestyle" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;shichialifestyle" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://shijia22.github.io/AI/20260703/816556734/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="釋迦 4+">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="釋迦佛系修練手札">
+      <meta itemprop="description" content="認為知識是一切的起點，透過數據可以獲得不同的解答，切點永遠不會只有一個，只有無數個和匹配現實的結果。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="AI 協作下的文件去識別化：從內部版到對外版的方法論 | 釋迦佛系修練手札">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI 協作下的文件去識別化：從內部版到對外版的方法論
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2026-07-03 21:10:00" itemprop="dateCreated datePublished" datetime="2026-07-03T21:10:00+08:00">2026-07-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>內部 PRD 寄給客戶前，你確定裡面沒有殘留報價、技術債註記、內部代號嗎？靠肉眼檢查，我可以告訴你：一定會漏。</p>
+<span id="more"></span>
+
+<!-- toc -->
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>做 B 端產品的 PM 都遇過這個場景：手上有一份寫得很完整的內部 PRD，裡面有技術債註記（「此處有 legacy schema 待清」）、內部估算（「2 MD」「補進 M1 sprint」）、甚至同事的真心話（「這需求很怪」）。現在客戶要 review，你得產一份「對外版」。</p>
+<p>以前的做法是複製一份、手動刪。結果每次都漏——不是漏掉一句報價未定，就是漏掉一個內部 Jira 單號。後來我把整套流程規則化，交給 AI 執行，才發現去識別化這件事，值得一套方法論。</p>
+<h2 id="核心原則：對外版永遠重新推導"><a href="#核心原則：對外版永遠重新推導" class="headerlink" title="核心原則：對外版永遠重新推導"></a>核心原則：對外版永遠重新推導</h2><p>第一條紅線：<strong>不可直接編輯對外版</strong>。</p>
+<p>兩個版本各自演化，一定會漂移——內部版改了第 5 章，對外版忘了跟；對外版臨時加了一段客戶要的說明，內部版沒有。所以規則是：每次要產對外版，都以「當下的內部版」為 source，重新套一次改寫規則產出。對外版是 build artifact，不是可編輯的文件。</p>
+<h2 id="移除-改寫-保留-三分法"><a href="#移除-改寫-保留-三分法" class="headerlink" title="移除 &#x2F; 改寫 &#x2F; 保留 三分法"></a>移除 &#x2F; 改寫 &#x2F; 保留 三分法</h2><p>把「內部才能看的東西」窮舉成分類表，每一類都有明確動作：</p>
+<ul>
+<li><strong>移除（整段刪）</strong>：技術債註記、報價與合約狀態、內部成本估算（人天／人月／工時）、sprint 與 backlog 詞彙、內部檔案路徑、內部 Jira 單號、公司內部評語。</li>
+<li><strong>改寫（換用語）</strong>：「不可開工」→「不進入實作階段」（緩化最後通牒語氣）；「老闆說」→「依決策會議結論」（去個人化）；「報價定案」→「雙方完成商務定案」（不暴露內部商務狀態）。</li>
+<li><strong>保留（不要過度去識別化）</strong>：真正的第三方廠商名（客戶需要知道資料流經過誰）、需求編號如 <code>FR-03</code>（客戶 review 留言要有錨點）、資訊性的警示標記。</li>
+</ul>
+<p>「保留」這區塊很容易被忽略——去識別化做過頭，文件會變得沒資訊量，客戶反而看不懂。遇到「這算內部評語還是技術描述？」的歧義，規則是<strong>先問人，不要讓 AI 自行決策</strong>。</p>
+<h2 id="殘留掃描：grep-是最後一道關卡"><a href="#殘留掃描：grep-是最後一道關卡" class="headerlink" title="殘留掃描：grep 是最後一道關卡"></a>殘留掃描：grep 是最後一道關卡</h2><p>規則表寫得再完整，純靠「套規則」還是會漏。我的實測經驗：某一版對外文件跑了 <strong>4 輪 grep 才乾淨</strong>。</p>
+<p>所以流程最後有一道強制關卡：用 grep 掃描對外版，pattern 涵蓋所有已知的內部用語——技術債、人天數字、sprint、內部路徑、輪次標記等等。有 hit 就必須逐項處理，掃到乾淨為止。</p>
+<p>更重要的是回饋迴圈：<strong>這份 grep 清單不是窮舉，是 baseline</strong>。如果人工 review 時又抓到新類別的殘留，就回頭把 pattern 補進規則檔和 grep 清單，下次自動 catch。規則檔是活的。</p>
+<h2 id="反幻覺：AI-不准腦補"><a href="#反幻覺：AI-不准腦補" class="headerlink" title="反幻覺：AI 不准腦補"></a>反幻覺：AI 不准腦補</h2><p>讓 AI 做改寫有一個特有風險：它會「合理化」。內部版寫「金流廠商」，AI 很可能自作聰明補成某家常見的金流公司名——但你們家接的根本不是那家。</p>
+<p>所以有一條專門的紅線：<strong>不可憑印象腦補第三方廠商名</strong>。內部版寫什麼就是什麼，不確定就回頭問人。去識別化是「拿掉資訊」的工程，任何「補上資訊」的動作都是事故。</p>
+<h2 id="結語"><a href="#結語" class="headerlink" title="結語"></a>結語</h2><p>最後說個 meta 的事：你現在讀的這篇文章，本身就是用同一套方法寫成的——它的素材來自我真實的工作規則檔，經過移除（公司名、客戶名、系統代號）、改寫（換成通稱）、保留（方法與教訓本身），最後再掃一輪殘留才發出來。</p>
+<p>方法論能吃自己的狗糧，大概就是它成立的最好證明。期待自己下個優化工作流程的筆記！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AI-%E6%87%89%E7%94%A8/" rel="tag"><i class="fa fa-tag"></i> AI 應用</a>
+              <a href="/tags/%E6%96%87%E4%BB%B6/" rel="tag"><i class="fa fa-tag"></i> 文件</a>
+              <a href="/tags/%E5%8E%BB%E8%AD%98%E5%88%A5%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 去識別化</a>
+              <a href="/tags/PRD/" rel="tag"><i class="fa fa-tag"></i> PRD</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/AI/20260626/3268839164/" rel="prev" title="AI 自動迴圈的安全邊界：資格測試、停止條件與假設標記">
+                  <i class="fa fa-angle-left"></i> AI 自動迴圈的安全邊界：資格測試、停止條件與假設標記
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/AI/20260710/3012892498/" rel="next" title="把 LLM 當備援不當核心：旅行社自動化的克制用法">
+                  把 LLM 當備援不當核心：旅行社自動化的克制用法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/shijia22" class="github-corner" title="在 GitHub 上關注我" aria-label="在 GitHub 上關注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"shijia22/shijia22.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js" defer></script>
+
+</body>
+</html>
